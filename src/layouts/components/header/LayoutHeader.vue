@@ -12,6 +12,7 @@ import LayoutBreadcrumb from '@/layouts/components/breadcrumb/LayoutBreadcrumb.v
 import LayoutSetting from '@/layouts/components/setting/LayoutSetting.vue'
 import FullScreen from '@/layouts/components/fullscreen/FullScreen.vue'
 import SearchMenu from '@/layouts/components/searchMenu/SearchMenu.vue'
+import UserAvatar from '@/layouts/components/user/UserAvatar.vue'
 
 defineProps({
   collapsed: {
@@ -76,6 +77,7 @@ const layoutHeaderStyle = computed(() => {
         <a-tooltip title="刷新重置" v-if="showRefreshReset">
           <SyncOutlined @click="systemStore.clearCacheReload()" />
         </a-tooltip>
+        <UserAvatar />
         <LayoutSetting v-if="showSetting" />
       </a-space>
     </div>
