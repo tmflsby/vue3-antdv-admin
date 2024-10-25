@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { computed, getCurrentInstance, reactive, watch } from 'vue'
+import { computed, reactive, watch } from 'vue'
 import { theme as antdTheme } from 'ant-design-vue'
 import { cloneDeep } from 'lodash-es'
 import { useI18n } from 'vue-i18n'
@@ -9,7 +9,6 @@ import { toggleClass } from '@/utils/dom.js'
 export const useLayoutThemeStore = defineStore(
   'layoutTheme',
   () => {
-    const { proxy } = getCurrentInstance()
     const { locale } = useI18n()
 
     const layoutSetting = reactive({ ...defaultSettings })
