@@ -1,112 +1,120 @@
 /** 主题风格--风格算法 */
 export const themeAlgorithmOptions = [
   {
-    label: '明亮',
-    value: 'defaultAlgorithm'
+    label: 'setting.light',
+    value: 'defaultAlgorithm',
   },
   {
-    label: '暗黑',
-    value: 'darkAlgorithm'
+    label: 'setting.dark',
+    value: 'darkAlgorithm',
   },
   {
-    label: '紧凑',
-    value: 'compactAlgorithm'
-  }
+    label: 'setting.compact',
+    value: 'compactAlgorithm',
+  },
 ]
 
 /** 菜单主题 */
 export const menuThemeOptions = [
   {
-    label: '亮色',
-    value: 'light'
+    label: 'setting.light',
+    value: 'light',
   },
   {
-    label: '暗色',
-    value: 'dark'
-  }
+    label: 'setting.dark',
+    value: 'dark',
+  },
 ]
 
 /** 导航模式（布局方式） */
 export const layouts = [
   {
-    label: '侧边导航',
-    value: 'sidemenu'
+    label: 'setting.sidemenu',
+    value: 'sidemenu',
   },
   {
-    label: '顶部导航',
-    value: 'topmenu'
+    label: 'setting.topmenu',
+    value: 'topmenu',
   },
   {
-    label: '混合导航',
-    value: 'mixinmenu'
-  }
+    label: 'setting.mixinmenu',
+    value: 'mixinmenu',
+  },
 ]
 
 /** 主题色 */
 export const themeColors = [
   {
-    title: '拂晓蓝（默认）',
+    title: 'setting.techBlue',
     key: 'techBlue',
     value: '#1677FF',
-    tag: 'checkbox'
+    tag: 'checkbox',
   },
   {
-    title: '薄暮',
+    title: 'setting.dust',
     key: 'dust',
     value: '#F5222D',
-    tag: 'checkbox'
+    tag: 'checkbox',
   },
   {
-    title: '火山',
+    title: 'setting.volcano',
     key: 'volcano',
     value: '#FA541C',
-    tag: 'checkbox'
+    tag: 'checkbox',
   },
   {
-    title: '日暮',
+    title: 'setting.sunset',
     key: 'sunset',
     value: '#FAAD14',
-    tag: 'checkbox'
+    tag: 'checkbox',
   },
   {
-    title: '明青',
+    title: 'setting.cyan',
     key: 'cyan',
     value: '#13C2C2',
-    tag: 'checkbox'
+    tag: 'checkbox',
   },
   {
-    title: '极光绿',
+    title: 'setting.green',
     key: 'green',
     value: '#52C41A',
-    tag: 'checkbox'
+    tag: 'checkbox',
   },
   {
-    title: '极客蓝',
+    title: 'setting.geekBlue',
     key: 'geekblue',
     value: '#2F54EB',
-    tag: 'checkbox'
+    tag: 'checkbox',
   },
   {
-    title: '酱紫',
+    title: 'setting.purple',
     key: 'purple',
     value: '#722ED1',
-    tag: 'checkbox'
+    tag: 'checkbox',
   },
   {
-    title: '自定义',
+    title: 'setting.custom',
     key: 'custom',
     value: '',
-    tag: 'input-color'
-  }
+    tag: 'input-color',
+  },
 ]
 
 /** 页面切换动画 */
 export const animations = [
-  { animation: 'back', name: '渐进', options: ['Down', 'Left', 'Right', 'Up'] },
-  { animation: 'bounce', name: '弹跳', options: ['Default', 'Down', 'Left', 'Right', 'Up'] },
+  {
+    animation: 'back',
+    name: 'setting.back',
+    options: ['Down', 'Left', 'Right', 'Up'],
+  },
+  {
+    animation: 'bounce',
+    name: 'setting.bounce',
+    options: ['Default', 'Down', 'Left', 'Right', 'Up'],
+  },
   {
     animation: 'fade',
-    name: '淡化',
+    name: 'setting.fade',
     options: [
       'Default',
       'Down',
@@ -120,197 +128,232 @@ export const animations = [
       'TopLeft',
       'TopRight',
       'BottomLeft',
-      'BottomRight'
-    ]
+      'BottomRight',
+    ],
   },
-  { animation: 'flip', name: '翻转', options: ['X', 'Y'] },
-  { animation: 'lightSpeed', name: '光速', options: ['Right', 'Left'] },
+  { animation: 'flip', name: 'setting.flip', options: ['X', 'Y'] },
+  {
+    animation: 'lightSpeed',
+    name: 'setting.lightSpeed',
+    options: ['Right', 'Left'],
+  },
   {
     animation: 'rotate',
-    name: '旋转',
-    options: ['Default', 'DownLeft', 'DownRight', 'UpLeft', 'UpRight']
+    name: 'setting.rotate',
+    options: ['Default', 'DownLeft', 'DownRight', 'UpLeft', 'UpRight'],
   },
-  { animation: 'roll', name: '翻滚', options: ['Default'] },
-  { animation: 'zoom', name: '缩放', options: ['Default', 'Down', 'Left', 'Right', 'Up'] },
-  { animation: 'slide', name: '滑动', options: ['Down', 'Left', 'Right', 'Up'] }
+  { animation: 'roll', name: 'setting.roll', options: ['Default'] },
+  {
+    animation: 'zoom',
+    name: 'setting.zoom',
+    options: ['Default', 'Down', 'Left', 'Right', 'Up'],
+  },
+  {
+    animation: 'slide',
+    name: 'setting.slide',
+    options: ['Down', 'Left', 'Right', 'Up'],
+  },
 ]
 
 /** 水印区域 */
 export const watermarkAreaOptions = [
   {
-    label: '全部区域',
-    value: 'all'
+    label: 'setting.allArea',
+    value: 'all',
   },
   {
-    label: '内容区域',
-    value: 'content'
-  }
+    label: 'setting.contentArea',
+    value: 'content',
+  },
+]
+
+/** 国际化 */
+export const i18nSettings = [
+  {
+    label: 'setting.simpleChinese',
+    value: 'zhCN',
+  },
+  {
+    label: 'setting.english',
+    value: 'en',
+  },
 ]
 
 /** 界面显示相关 */
 export const uiSettings = [
   {
-    label: '系统名称',
+    label: 'setting.systemName',
     value: 'title',
-    tag: 'input'
+    tag: 'input',
   },
   {
-    label: '主题风格',
+    label: 'setting.themeStyle',
     value: 'algorithm',
     tag: 'segmented',
-    options: themeAlgorithmOptions
+    options: themeAlgorithmOptions,
   },
   {
-    label: '菜单主题',
+    label: 'setting.menuTheme',
     value: 'menuTheme',
     tag: 'segmented',
-    options: menuThemeOptions
+    options: menuThemeOptions,
   },
   {
-    label: '菜单宽度',
+    label: 'setting.menuWidth',
     value: 'sidemenuWidth',
     tag: 'input-number',
     min: 200,
     max: 350,
-    unit: 'px'
+    unit: 'unit.px',
   },
   {
-    label: '页头（顶栏）主题跟随菜单',
+    label: 'setting.navThemeFollowMenu',
     value: 'navThemeFollowMenu',
-    tag: 'switch'
+    tag: 'switch',
   },
   {
-    label: '全屏内容',
+    label: 'setting.fullScreenContent',
     value: 'onlyShowContent',
-    tag: 'switch'
+    tag: 'switch',
   },
   {
-    label: '灰色模式',
+    label: 'setting.grayMode',
     value: 'grayMode',
-    tag: 'switch'
+    tag: 'switch',
   },
   {
-    label: '色弱模式',
+    label: 'setting.colorWeak',
     value: 'colorWeak',
-    tag: 'switch'
+    tag: 'switch',
   },
   {
-    label: 'Logo标题',
+    label: 'setting.logoTitle',
     value: 'showTitle',
-    tag: 'switch'
+    tag: 'switch',
   },
   {
-    label: '页头（顶栏）',
+    label: 'setting.header',
     value: 'showHeader',
-    tag: 'switch'
+    tag: 'switch',
   },
   {
-    label: '页脚',
+    label: 'setting.footer',
     value: 'showFooter',
-    tag: 'switch'
+    tag: 'switch',
   },
   {
-    label: '版权信息',
+    label: 'setting.copyright',
     value: 'copyright',
-    tag: 'input'
+    tag: 'input',
   },
   {
-    label: '标签页',
+    label: 'setting.tabs',
     value: 'showTabs',
-    tag: 'switch'
+    tag: 'switch',
   },
   {
-    label: '标签图标',
+    label: 'setting.tabsIcon',
     value: 'tabsIcon',
-    tag: 'switch'
+    tag: 'switch',
   },
   {
-    label: '标签持久化',
+    label: 'setting.cacheTabs',
     value: 'cacheTabs',
-    tag: 'switch'
+    tag: 'switch',
   },
   {
-    label: '进度条',
+    label: 'setting.progress',
     value: 'showProgress',
-    tag: 'switch'
+    tag: 'switch',
   },
   {
-    label: '面包屑',
+    label: 'setting.breadcrumb',
     value: 'showBreadcrumb',
-    tag: 'switch'
+    tag: 'switch',
   },
   {
-    label: '设置',
+    label: 'setting.locale',
+    value: 'locale',
+    tag: 'switch',
+  },
+  // {
+  //   label: 'setting.language',
+  //   value: 'language',
+  //   tag: 'select',
+  //   options: i18nSettings
+  // },
+  {
+    label: 'setting.setting',
     value: 'showSetting',
-    tag: 'switch'
+    tag: 'switch',
   },
   {
-    label: '全屏',
+    label: 'setting.fullscreen',
     value: 'showFullScreen',
-    tag: 'switch'
+    tag: 'switch',
   },
   {
-    label: '菜单搜索',
+    label: 'setting.searchMenu',
     value: 'showSearchMenu',
-    tag: 'switch'
+    tag: 'switch',
   },
   {
-    label: '刷新重置',
+    label: 'setting.refreshReset',
     value: 'showRefreshReset',
-    tag: 'switch'
+    tag: 'switch',
   },
   {
-    label: '锁屏',
+    label: 'setting.lockScreen',
     value: 'showLockScreen',
-    tag: 'switch'
+    tag: 'switch',
   },
   {
-    label: '锁屏时间',
+    label: 'setting.lockScreenTime',
     value: 'lockScreenTime',
     tag: 'input-number',
     min: 1,
     max: 24,
-    unit: '小时'
+    unit: 'unit.hours',
   },
   {
-    label: '圆角',
+    label: 'setting.borderRadius',
     value: 'borderRadius',
     tag: 'input-number',
     min: 0,
     max: 20,
-    unit: 'px'
+    unit: 'unit.px',
   },
   {
-    label: '页面动画',
+    label: 'setting.pageAnimation',
     value: 'showAnimation',
-    tag: 'switch'
+    tag: 'switch',
   },
   {
-    label: '动画效果',
+    label: 'setting.animation',
     value: 'animation',
-    tag: 'select'
+    tag: 'select',
   },
   {
-    label: '动画方向',
+    label: 'setting.animationDirection',
     value: 'animationDirection',
-    tag: 'select'
+    tag: 'select',
   },
   {
-    label: '水印',
+    label: 'setting.watermark',
     value: 'watermark',
-    tag: 'switch'
+    tag: 'switch',
   },
   {
-    label: '水印区域',
+    label: 'setting.watermarkArea',
     value: 'watermarkArea',
     tag: 'segmented',
-    options: watermarkAreaOptions
+    options: watermarkAreaOptions,
   },
   {
-    label: '水印文字',
+    label: 'setting.watermarkText',
     value: 'watermarkText',
-    tag: 'input'
-  }
+    tag: 'input',
+  },
 ]
 
 /**algorithm
@@ -333,6 +376,8 @@ export const defaultSettings = {
   showHeader: true,
   showFooter: true,
   showBreadcrumb: true,
+  locale: true,
+  language: 'zhCN',
   showSetting: true,
   showFullScreen: true,
   showSearchMenu: true,
@@ -350,5 +395,5 @@ export const defaultSettings = {
   animationDirection: 'Down',
   watermark: false,
   watermarkArea: 'all',
-  watermarkText: '🐥你太美，👶👶'
+  watermarkText: '🐥你太美，👶👶',
 }

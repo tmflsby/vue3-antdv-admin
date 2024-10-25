@@ -6,13 +6,13 @@ export const useUserStore = defineStore(
   'user',
   () => {
     const userInfo = ref({})
-    const setUserInfo = (data) => {
+    const setUserInfo = data => {
       userInfo.value = data
     }
 
     const router = useRouter()
 
-    const login = async (data) => {
+    const login = async data => {
       await router.push('/')
       setUserInfo(data)
     }
@@ -23,5 +23,5 @@ export const useUserStore = defineStore(
 
     return { userInfo, setUserInfo, login, logout }
   },
-  { persist: true }
+  { persist: true },
 )

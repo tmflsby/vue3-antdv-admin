@@ -7,8 +7,8 @@ import SubMenuItem from '@/layouts/components/menu/SubMenuItem.vue'
 
 const props = defineProps({
   collapsed: {
-    type: Boolean
-  }
+    type: Boolean,
+  },
 })
 
 const currentRoute = useRoute()
@@ -27,9 +27,11 @@ const menuTheme = computed(() => layoutSetting.menuTheme)
 
 // 获取当前打开的子菜单
 const getOpenKeys = () =>
-  currentRoute.meta.namePath ?? currentRoute.matched.slice(1).map((item) => item.name)
+  currentRoute.meta.namePath ??
+  currentRoute.matched.slice(1).map(item => item.name)
 
-const getRouteByName = (name) => router.getRoutes().find((item) => item.name === name)
+const getRouteByName = name =>
+  router.getRoutes().find(item => item.name === name)
 
 // 监听菜单收缩状态
 watch(
@@ -37,7 +39,7 @@ watch(
   () => {
     selectedKeys.value = currentRoute.name ? [currentRoute.name] : []
     openKeys.value = getOpenKeys()
-  }
+  },
 )
 
 // 跟随页面路由变化，切换菜单选中状态
@@ -48,8 +50,8 @@ watch(
     openKeys.value = getOpenKeys()
   },
   {
-    immediate: true
-  }
+    immediate: true,
+  },
 )
 
 const clickMenuItem = ({ key }) => {

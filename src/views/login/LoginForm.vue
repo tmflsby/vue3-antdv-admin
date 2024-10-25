@@ -1,24 +1,25 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { Icon } from '@iconify/vue'
+import { useI18n } from 'vue-i18n'
 import { message } from 'ant-design-vue'
 import { UserOutlined, LockOutlined } from '@ant-design/icons-vue'
 import { useLayoutThemeStore } from '@/store/layout/layoutTheme.js'
 import { useUserStore } from '@/store/business/user.js'
 
+const { t } = useI18n()
 const layoutSetting = useLayoutThemeStore().layoutSetting
 const borderRadius = computed(() => layoutSetting.borderRadius)
-
 const userStore = useUserStore()
 
 const formState = ref({
   username: 'admin',
   password: '123456',
-  verifyCode: ''
+  verifyCode: '',
 })
 
 // 随机验证码 大小写字母 数字
-const randomCode = (strLen) => {
+const randomCode = strLen => {
   const code = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
   let str = ''
   for (let i = 0; i < strLen; i++) {
@@ -28,43 +29,57 @@ const randomCode = (strLen) => {
 }
 const imageCode = ref(randomCode(4))
 
-const onFinish = (values) => {
+const onFinish = values => {
   console.log('Success:', values)
-  if (formState.value.verifyCode.toLocaleLowerCase() !== imageCode.value.toLocaleLowerCase()) {
-    message.error('验证码错误！')
+  if (
+    formState.value.verifyCode.toLocaleLowerCase() !==
+    imageCode.value.toLocaleLowerCase()
+  ) {
+    message.error(t('message.verifyCodeError'))
     imageCode.value = randomCode(4)
     formState.value.verifyCode = ''
     return
   }
 
   userStore.login({
-    username: formState.value.username
+    username: formState.value.username,
   })
-  message.success('登录成功！')
+  message.success(t('message.loginSuccess'))
+
+  // 测试动态路由（在这里动态增加路由）
 }
 
-const onFinishFailed = (errorInfo) => {
+const onFinishFailed = errorInfo => {
   console.log('Failed:', errorInfo)
 }
 </script>
 
 <template>
   <a-form :model="formState" @finish="onFinish" @finishFailed="onFinishFailed">
-    <a-form-item name="username" :rules="[{ required: true, message: '请输入用户名！' }]">
+    <a-form-item
+      name="username"
+      :rules="[{ required: true, message: t('message.pleaseEnterUsername') }]"
+    >
       <a-input v-model:value="formState.username">
         <template #prefix>
           <UserOutlined />
         </template>
       </a-input>
     </a-form-item>
-    <a-form-item name="password" :rules="[{ required: true, message: '请输入密码！' }]">
+    <a-form-item
+      name="password"
+      :rules="[{ required: true, message: t('message.pleaseEnterPassword') }]"
+    >
       <a-input-password v-model:value="formState.password">
         <template #prefix>
           <LockOutlined />
         </template>
       </a-input-password>
     </a-form-item>
-    <a-form-item name="verifyCode" :rules="[{ required: true, message: '请输入验证码！' }]">
+    <a-form-item
+      name="verifyCode"
+      :rules="[{ required: true, message: t('message.pleaseEnterVerifyCode') }]"
+    >
       <a-input class="w250px" v-model:value="formState.verifyCode">
         <template #prefix>
           <Icon icon="material-symbols-light:key" />
@@ -79,7 +94,9 @@ const onFinishFailed = (errorInfo) => {
       </span>
     </a-form-item>
     <a-form-item>
-      <a-button class="w100%" type="primary" html-type="submit">登录</a-button>
+      <a-button class="w100%" type="primary" html-type="submit">
+        {{ t('setting.login') }}
+      </a-button>
     </a-form-item>
   </a-form>
 </template>

@@ -6,7 +6,12 @@ const route = useRoute()
 
 <template>
   <a-card>
-    <iframe class="w100% h800px" frameborder="0" :src="route.meta.iframe" :name="route.name" />
+    <iframe
+      class="w100% h800px"
+      frameborder="0"
+      :src="route.meta.iframe"
+      :name="route.name"
+    />
   </a-card>
 </template>
 

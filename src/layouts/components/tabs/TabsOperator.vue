@@ -1,5 +1,6 @@
 <script setup>
 import { computed, unref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useRoute, useRouter } from 'vue-router'
 import { useSystemStore } from '@/store/layout/system.js'
 import { useLayoutThemeStore } from '@/store/layout/layoutTheme.js'
@@ -12,21 +13,22 @@ import {
   VerticalRightOutlined,
   VerticalLeftOutlined,
   ColumnWidthOutlined,
-  MinusOutlined
+  MinusOutlined,
 } from '@ant-design/icons-vue'
 import { Icon } from '@iconify/vue'
 
 const props = defineProps({
   tabItem: {
     type: Object,
-    required: true
+    required: true,
   },
   isExtra: {
     type: Boolean,
-    default: false
-  }
+    default: false,
+  },
 })
 
+const { t } = useI18n()
 const route = useRoute()
 const router = useRouter()
 const systemStore = useSystemStore()
@@ -40,23 +42,22 @@ const layoutSetting = layoutThemeStore.layoutSetting
 const tabsIcon = computed(() => layoutSetting.tabsIcon)
 
 // 目标路由是否与当前路由相同
-const isCurrentRoute = (route) =>
-  router.currentRoute.value.matched.some((item) => item.name === route.name)
+const isCurrentRoute = route =>
+  router.currentRoute.value.matched.some(item => item.name === route.name)
 
 const reloadPage = () => {
   router.replace({
     name: 'Refresh',
-    params: {
-      path: unref(route).fullPath
-    }
+    path: unref(route).fullPath,
   })
 }
 const removeTab = () => {
-  if (tabsList.value.length === 1) return message.warning('这已经是最后一页，不能再关闭了！')
+  if (tabsList.value.length === 1)
+    return message.warning(t('message.lastPageCannotBeClosed'))
   systemStore.closeCurrentTab(props.tabItem)
 }
 defineExpose({
-  removeTab
+  removeTab,
 })
 const closeLeft = () => {
   systemStore.closeLeftTabs(props.tabItem)
@@ -82,7 +83,7 @@ const openPageFile = async () => {
   }
 
   const routes = router.getRoutes()
-  const target = routes.find((n) => n.name === props.tabItem.name)
+  const target = routes.find(n => n.name === props.tabItem.name)
   if (target) {
     const comp = target.components?.default
     let __file = comp?.__file
@@ -112,11 +113,15 @@ const openPageFile = async () => {
       <template v-if="tabsIcon">
         <Icon class="iconify anticon" :icon="tabItem.meta.icon" />
       </template>
-      <span>{{ tabItem.meta?.title }}</span>
+      <span>{{ t(tabItem.meta?.title) }}</span>
     </div>
     <template #overlay>
       <a-menu style="user-select: none">
-        <a-menu-item key="1" :disabled="activeKey !== tabItem.fullPath" @click="reloadPage">
+        <a-menu-item
+          key="1"
+          :disabled="activeKey !== tabItem.fullPath"
+          @click="reloadPage"
+        >
           <ReloadOutlined />
           重新加载
         </a-menu-item>

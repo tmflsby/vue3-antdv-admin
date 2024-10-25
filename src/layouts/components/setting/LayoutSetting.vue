@@ -2,20 +2,23 @@
 import { ref, computed } from 'vue'
 import { message } from 'ant-design-vue'
 import { SettingOutlined } from '@ant-design/icons-vue'
+import { useI18n } from 'vue-i18n'
 import {
   layouts,
   themeColors,
-  // themeAlgorithm,
   uiSettings,
-  animations
+  animations,
 } from '@/settings/layoutTheme.js'
 import { useLayoutThemeStore } from '@/store/layout/layoutTheme.js'
 import { useSystemStore } from '@/store/layout/system.js'
 
+const { t } = useI18n()
 const layoutThemeStore = useLayoutThemeStore()
 const layoutSetting = computed(() => layoutThemeStore.layoutSetting)
 const colorPrimary = computed(() => layoutThemeStore.layoutSetting.colorPrimary)
-const colorPickerStyle = computed(() => ({ '--custom-color': colorPrimary.value }))
+const colorPickerStyle = computed(() => ({
+  '--custom-color': colorPrimary.value,
+}))
 
 const systemStore = useSystemStore()
 
@@ -24,35 +27,40 @@ const showDrawer = () => {
   visible.value = true
 }
 
-const setLayout = (layout) => {
+const setLayout = layout => {
   layoutThemeStore.updateLayoutSetting({ layout })
 }
 
-const setThemeColor = (colorPrimary) => {
+const setThemeColor = colorPrimary => {
   layoutThemeStore.updateLayoutSetting({ colorPrimary })
 }
 
-const getThemeColorVisible = (color) => (colorPrimary.value === color ? 'visible' : 'hidden')
+const getThemeColorVisible = color =>
+  colorPrimary.value === color ? 'visible' : 'hidden'
 
 const copySettings = () => {
   const settings = JSON.stringify(layoutSetting.value)
   navigator.clipboard.writeText(settings)
-  message.success('复制成功')
+  message.success(t('message.copySuccess'))
 }
 
-const handleColorPickerInput = (e) => {
+const handleColorPickerInput = e => {
   setThemeColor(e.target.value)
 }
 </script>
 
 <template>
-  <a-tooltip title="项目配置">
+  <a-tooltip :title="t('setting.projectConfig')" :placement="'bottomRight'">
     <SettingOutlined @click="showDrawer" />
   </a-tooltip>
-  <a-drawer v-model:open="visible" placement="right" title="项目配置">
-    <a-descriptions title="导航布局" :column="5">
+  <a-drawer
+    v-model:open="visible"
+    placement="right"
+    :title="t('setting.projectConfig')"
+  >
+    <a-descriptions :title="t('setting.menuLayout')" :column="5">
       <a-descriptions-item v-for="item in layouts" :key="item.value">
-        <a-tooltip :title="item.label">
+        <a-tooltip :title="t(item.label)">
           <div
             class="style-checkbox-item"
             :class="{ active: layoutSetting.layout === item.value }"
@@ -65,12 +73,17 @@ const handleColorPickerInput = (e) => {
         </a-tooltip>
       </a-descriptions-item>
     </a-descriptions>
-    <a-descriptions title="主题色" :column="themeColors.length - 1">
+    <a-descriptions
+      :title="t('setting.themeColor')"
+      :column="themeColors.length - 1"
+    >
       <a-descriptions-item v-for="item in themeColors" :key="item.key">
         <div class="style-checkbox-item" v-if="item.tag === 'checkbox'">
-          <a-tooltip :title="item.title">
+          <a-tooltip :title="t(item.title)">
             <a-tag :color="item.value" @click="setThemeColor(item.value)">
-              <span :style="{ visibility: getThemeColorVisible(item.value) }"> ✔ </span>
+              <span :style="{ visibility: getThemeColorVisible(item.value) }">
+                ✔
+              </span>
             </a-tag>
           </a-tooltip>
         </div>
@@ -79,7 +92,7 @@ const handleColorPickerInput = (e) => {
           class="w-full flex items-center style-checkbox-item"
           v-if="item.tag === 'input-color'"
         >
-          自定义
+          {{ t('setting.customColor') }}
           <a-tag :color="colorPrimary" class="relative overflow-hidden">
             <a-input
               type="color"
@@ -88,37 +101,35 @@ const handleColorPickerInput = (e) => {
               v-model="colorPrimary"
               @input="handleColorPickerInput"
             />
-            <span :style="{ visibility: getThemeColorVisible(colorPrimary) }"> ✔ </span>
+            <span :style="{ visibility: getThemeColorVisible(colorPrimary) }">
+              ✔
+            </span>
           </a-tag>
         </a-flex>
       </a-descriptions-item>
     </a-descriptions>
-    <a-descriptions title="页面显示" :column="1">
+    <a-descriptions :title="t('setting.pageDisplay')" :column="1">
       <a-descriptions-item v-for="item in uiSettings" :key="item.value">
         <a-flex
           justify="space-between"
           class="w-full flex items-center"
           v-if="item.tag === 'switch'"
         >
-          {{ item.label }}
-          <a-switch
-            v-model:checked="layoutSetting[item.value]"
-            checked-children="开"
-            un-checked-children="关"
-          />
+          {{ t(item.label) }}
+          <a-switch v-model:checked="layoutSetting[item.value]" />
         </a-flex>
         <a-flex
           justify="space-between"
           class="w-full flex items-center"
           v-if="item.tag === 'input-number'"
         >
-          {{ item.label }}
+          {{ t(item.label) }}
           <a-input-number
             style="width: 200px"
             v-model:value="layoutSetting[item.value]"
             :min="item.min"
             :max="item.max"
-            :addon-after="item.unit"
+            :addon-after="t(item.unit)"
           />
         </a-flex>
         <a-flex
@@ -126,34 +137,52 @@ const handleColorPickerInput = (e) => {
           class="w-full flex items-center"
           v-if="item.tag === 'input'"
         >
-          {{ item.label }}
-          <a-input style="width: 200px" v-model:value="layoutSetting[item.value]" />
+          {{ t(item.label) }}
+          <a-input
+            style="width: 200px"
+            v-model:value="layoutSetting[item.value]"
+          />
         </a-flex>
         <a-flex
           justify="space-between"
           class="w-full flex items-center"
           v-if="item.tag === 'select'"
         >
-          {{ item.label }}
+          {{ t(item.label) }}
           <a-select
             style="width: 200px"
             v-if="item.value === 'animation'"
             v-model:value="layoutSetting.animation"
           >
             <a-select-option v-for="val in animations" :key="val.animation">
-              {{ val.name }}
+              {{ t(val.name) }}
             </a-select-option>
           </a-select>
           <a-select
             style="width: 200px"
-            v-if="item.value === 'animationDirection'"
+            v-else-if="item.value === 'animationDirection'"
             v-model:value="layoutSetting.animationDirection"
           >
             <a-select-option
-              v-for="val in animations.find((i) => i.animation === layoutSetting.animation).options"
+              v-for="val in animations.find(
+                i => i.animation === layoutSetting.animation,
+              ).options"
               :key="val"
             >
               {{ val }}
+            </a-select-option>
+          </a-select>
+          <a-select
+            v-else
+            style="width: 200px"
+            v-model:value="layoutSetting[item.value]"
+          >
+            <a-select-option
+              v-for="val in item.options"
+              :key="val.value"
+              :value="val.value"
+            >
+              {{ t(val.label) }}
             </a-select-option>
           </a-select>
         </a-flex>
@@ -162,21 +191,31 @@ const handleColorPickerInput = (e) => {
           class="w-full flex items-center"
           v-if="item.tag === 'segmented'"
         >
-          {{ item.label }}
+          {{ t(item.label) }}
           <a-segmented
-            style="width: 200px"
             v-model:value="layoutSetting[item.value]"
-            :block="true"
-            :options="item.options"
+            :options="
+              item.options.map(option => ({
+                value: option.value,
+                label: t(option.label),
+              }))
+            "
           />
         </a-flex>
       </a-descriptions-item>
     </a-descriptions>
     <template #footer>
       <div class="flex-ac">
-        <a-button class="w-45%" type="primary" @click="copySettings">拷贝</a-button>
-        <a-button class="w-45%" type="primary" danger @click="systemStore.clearCacheReload">
-          清空缓存并重置
+        <a-button class="w-45%" type="primary" @click="copySettings">
+          {{ t('setting.copy') }}
+        </a-button>
+        <a-button
+          class="w-45%"
+          type="primary"
+          danger
+          @click="systemStore.clearCacheReload"
+        >
+          {{ t('setting.clearCacheAndReset') }}
         </a-button>
       </div>
     </template>

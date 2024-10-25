@@ -1,20 +1,24 @@
 import { defineStore } from 'pinia'
-import { computed, reactive, watch } from 'vue'
+import { computed, getCurrentInstance, reactive, watch } from 'vue'
 import { theme as antdTheme } from 'ant-design-vue'
 import { cloneDeep } from 'lodash-es'
+import { useI18n } from 'vue-i18n'
 import { defaultSettings, animations } from '@/settings/layoutTheme.js'
 import { toggleClass } from '@/utils/dom.js'
 
 export const useLayoutThemeStore = defineStore(
   'layoutTheme',
   () => {
+    const { proxy } = getCurrentInstance()
+    const { locale } = useI18n()
+
     const layoutSetting = reactive({ ...defaultSettings })
     const theme = reactive({
       algorithm: antdTheme[layoutSetting.algorithm],
       token: {
         colorPrimary: layoutSetting.colorPrimary,
-        borderRadius: layoutSetting.borderRadius
-      }
+        borderRadius: layoutSetting.borderRadius,
+      },
     })
 
     const changeNprogressBg = () => {
@@ -54,19 +58,22 @@ export const useLayoutThemeStore = defineStore(
         }
         if (newVal.animation !== oldVal.animation) {
           layoutSetting.animationDirection = animations.find(
-            (item) => item.animation === layoutSetting.animation
+            item => item.animation === layoutSetting.animation,
           ).options[0]
         }
         if (newVal.borderRadius !== oldVal.borderRadius) {
           theme.token.borderRadius = layoutSetting.borderRadius
         }
+        if (newVal.language !== oldVal.language) {
+          locale.value = layoutSetting.language
+        }
       },
       {
-        deep: true
-      }
+        deep: true,
+      },
     )
 
-    const updateLayoutSetting = (settings) => {
+    const updateLayoutSetting = settings => {
       Object.assign(layoutSetting, settings)
     }
 
@@ -319,7 +326,9 @@ export const useLayoutThemeStore = defineStore(
       }
       return headerBackground
     })
-    const headerColor = computed(() => (headerBackground.value === '#fff' ? '#000' : '#fff'))
+    const headerColor = computed(() =>
+      headerBackground.value === '#fff' ? '#000' : '#fff',
+    )
 
     return {
       layoutSetting,
@@ -328,10 +337,10 @@ export const useLayoutThemeStore = defineStore(
       titleColor,
       headerBackground,
       headerColor,
-      updateLayoutSetting
+      updateLayoutSetting,
     }
   },
   {
-    persist: true
-  }
+    persist: true,
+  },
 )

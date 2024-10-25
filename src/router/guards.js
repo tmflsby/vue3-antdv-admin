@@ -2,16 +2,16 @@ import NProgress from 'nprogress'
 import { useSystemStore } from '@/store/layout/system.js'
 import { useLayoutThemeStore } from '@/store/layout/layoutTheme.js'
 
-const getComponentName = (route) => {
+const getComponentName = route => {
   return route.matched
-    .map((item) => {
+    .map(item => {
       if (!item.meta?.keepAlive || item.redirect) return
       return item.name
     })
     .filter(Boolean)
 }
 
-export const routerGuard = (router) => {
+export const routerGuards = router => {
   router.beforeEach((to, from, next) => {
     const layoutThemeStore = useLayoutThemeStore()
     if (layoutThemeStore.layoutSetting.showProgress) {
@@ -20,7 +20,7 @@ export const routerGuard = (router) => {
     next()
   })
 
-  router.afterEach((to) => {
+  router.afterEach(to => {
     const layoutThemeStore = useLayoutThemeStore()
     if (layoutThemeStore.layoutSetting.showProgress) {
       NProgress.done()
@@ -34,7 +34,7 @@ export const routerGuard = (router) => {
         systemStore.addKeepAliveList(toComponentName)
       } else {
         console.warn(
-          `${to.fullPath}页面组件的keepAlive为true但未设置组件名，会导致缓存失效，请检查`
+          `${to.fullPath}页面组件的keepAlive为true但未设置组件名，会导致缓存失效，请检查`,
         )
       }
     } else {

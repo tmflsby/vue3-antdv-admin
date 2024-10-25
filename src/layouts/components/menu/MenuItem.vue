@@ -5,12 +5,12 @@ import MenuItemContent from '@/layouts/components/menu/MenuItemContent.vue'
 defineProps({
   item: {
     type: Object,
-    default: () => ({})
-  }
+    default: () => ({}),
+  },
 })
 
 const router = useRouter()
-const handleMenuItemClick = (item) => {
+const handleMenuItemClick = item => {
   const { outsideLink } = item.meta || {}
   if (outsideLink) {
     window.open(item.path)

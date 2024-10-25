@@ -18,16 +18,16 @@ const overflow = ref('auto')
 const height = computed(() =>
   onlyShowContent.value
     ? '100vh'
-    : `calc(100vh - ${layoutSetting.showHeader ? 'var(--app-header-height)' : '0px'} - ${layoutSetting.showTabs ? '50px' : '0px'} - ${layoutSetting.showFooter ? 'var(--app-footer-height)' : '0px'})`
+    : `calc(100vh - ${layoutSetting.showHeader ? 'var(--app-header-height)' : '0px'} - ${layoutSetting.showTabs ? '50px' : '0px'} - ${layoutSetting.showFooter ? 'var(--app-footer-height)' : '0px'})`,
 )
 
 const enterActiveClass = computed(
   () =>
-    `animate__animated animate__${layoutSetting.animation}In${layoutSetting.animationDirection === 'Default' ? '' : layoutSetting.animationDirection}`
+    `animate__animated animate__${layoutSetting.animation}In${layoutSetting.animationDirection === 'Default' ? '' : layoutSetting.animationDirection}`,
 )
 const leaveActiveClass = computed(
   () =>
-    `animate__animated animate__${layoutSetting.animation}Out${layoutSetting.animationDirection === 'Default' ? '' : layoutSetting.animationDirection}`
+    `animate__animated animate__${layoutSetting.animation}Out${layoutSetting.animationDirection === 'Default' ? '' : layoutSetting.animationDirection}`,
 )
 </script>
 
@@ -36,7 +36,7 @@ const leaveActiveClass = computed(
     class="p20px overflow-hidden"
     :style="{
       overflow,
-      height
+      height,
     }"
   >
     <RouterView>

@@ -1,7 +1,9 @@
 <script setup>
 import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useUserStore } from '@/store/business/user.js'
 
+const { t } = useI18n()
 const userStore = useUserStore()
 const userInfo = computed(() => userStore.userInfo)
 
@@ -14,7 +16,7 @@ const logout = () => {
   <a-dropdown>
     <template #overlay>
       <a-menu>
-        <a-menu-item @click="logout">退出登录</a-menu-item>
+        <a-menu-item @click="logout">{{ t('setting.logout') }}</a-menu-item>
       </a-menu>
     </template>
     <a-avatar :src="userInfo.avatar" :alt="userInfo.username">

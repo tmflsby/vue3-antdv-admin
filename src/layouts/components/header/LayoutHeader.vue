@@ -1,10 +1,11 @@
 <script setup>
 import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   LockOutlined,
-  SyncOutlined
+  SyncOutlined,
 } from '@ant-design/icons-vue'
 import { useLayoutThemeStore } from '@/store/layout/layoutTheme.js'
 import { useSystemStore } from '@/store/layout/system.js'
@@ -12,14 +13,16 @@ import LayoutBreadcrumb from '@/layouts/components/breadcrumb/LayoutBreadcrumb.v
 import LayoutSetting from '@/layouts/components/setting/LayoutSetting.vue'
 import FullScreen from '@/layouts/components/fullscreen/FullScreen.vue'
 import SearchMenu from '@/layouts/components/searchMenu/SearchMenu.vue'
+import LocaleLanguage from '@/layouts/components/locale/LocaleLanguage.vue'
 import UserAvatar from '@/layouts/components/user/UserAvatar.vue'
 
 defineProps({
   collapsed: {
-    type: Boolean
-  }
+    type: Boolean,
+  },
 })
 
+const { t } = useI18n()
 const systemStore = useSystemStore()
 const layoutThemeStore = useLayoutThemeStore()
 const layoutSetting = layoutThemeStore.layoutSetting
@@ -32,6 +35,7 @@ const showLockScreen = computed(() => layoutSetting.showLockScreen)
 const showFullScreen = computed(() => layoutSetting.showFullScreen)
 const showSetting = computed(() => layoutSetting.showSetting)
 const showRefreshReset = computed(() => layoutSetting.showRefreshReset)
+const locale = computed(() => layoutSetting.locale)
 const sidemenuWidth = computed(() => layoutSetting.sidemenuWidth)
 const headerBackground = computed(() => layoutThemeStore.headerBackground)
 const headerColor = computed(() => layoutThemeStore.headerColor)
@@ -45,7 +49,7 @@ const layoutHeaderStyle = computed(() => {
     padding: layout_sidemenu.value ? '0 20px' : '0 20px 0 0',
     background: headerBackground.value,
     color: headerColor.value,
-    borderBottom: border.value
+    borderBottom: border.value,
   }
 })
 </script>
@@ -55,10 +59,16 @@ const layoutHeaderStyle = computed(() => {
     <div :style="{ width: `${sidemenuWidth}px` }" v-if="!layout_sidemenu">
       <slot name="title"></slot>
     </div>
-    <div :style="{ paddingLeft: layout_mixinmenu ? '20px' : 0 }" v-if="!layout_topmenu">
+    <div
+      :style="{ paddingLeft: layout_mixinmenu ? '20px' : 0 }"
+      v-if="!layout_topmenu"
+    >
       <slot name="left"> </slot>
       <a-space :size="20" v-if="!layout_topmenu">
-        <span class="cursor-pointer" @click="() => emit('update:collapsed', !collapsed)">
+        <span
+          class="cursor-pointer"
+          @click="() => emit('update:collapsed', !collapsed)"
+        >
           <component :is="collapsed ? MenuUnfoldOutlined : MenuFoldOutlined" />
         </span>
         <LayoutBreadcrumb v-if="showBreadcrumb" />
@@ -70,13 +80,14 @@ const layoutHeaderStyle = computed(() => {
     <div>
       <a-space :size="20">
         <SearchMenu v-if="showSearchMenu" />
-        <a-tooltip title="锁屏" v-if="showLockScreen">
+        <a-tooltip :title="t('setting.lockScreen')" v-if="showLockScreen">
           <LockOutlined @click="systemStore.setLockScreenState(true)" />
         </a-tooltip>
         <FullScreen v-if="showFullScreen" />
-        <a-tooltip title="刷新重置" v-if="showRefreshReset">
+        <a-tooltip :title="t('setting.refreshReset')" v-if="showRefreshReset">
           <SyncOutlined @click="systemStore.clearCacheReload()" />
         </a-tooltip>
+        <LocaleLanguage v-if="locale" />
         <UserAvatar />
         <LayoutSetting v-if="showSetting" />
       </a-space>

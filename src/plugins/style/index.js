@@ -1,3 +1,3 @@
 import '@/styles/index.less'
 
-export const setupStyle = () => ({})
+export const setupStyle = () => {}

@@ -13,7 +13,7 @@ const bodyStyle = computed(() => ({
   width: '100%',
   height: '100%',
   backgroundColor: algorithm.value === 'darkAlgorithm' ? '#001529' : '#eee',
-  position: 'relative'
+  position: 'relative',
 }))
 </script>
 
@@ -30,7 +30,7 @@ const bodyStyle = computed(() => ({
       class="pos-absolute w400px h400px"
       :style="{
         top: 'calc(50% - 200px)',
-        left: 'calc(50% - 200px)'
+        left: 'calc(50% - 200px)',
       }"
     >
       <template #title>

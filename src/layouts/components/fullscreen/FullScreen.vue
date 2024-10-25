@@ -1,10 +1,18 @@
 <script lang="ts" setup>
 import { computed, unref } from 'vue'
-import { FullscreenExitOutlined, FullscreenOutlined } from '@ant-design/icons-vue'
+import {
+  FullscreenExitOutlined,
+  FullscreenOutlined,
+} from '@ant-design/icons-vue'
+import { useI18n } from 'vue-i18n'
 import { useFullscreen } from '@vueuse/core'
-const { toggle, isFullscreen } = useFullscreen()
 
-const getTitle = computed(() => (unref(isFullscreen) ? '退出全屏' : '全屏'))
+const { toggle, isFullscreen } = useFullscreen()
+const { t } = useI18n()
+
+const getTitle = computed(() =>
+  unref(isFullscreen) ? t('setting.exitFullscreen') : t('setting.fullscreen'),
+)
 </script>
 
 <template>

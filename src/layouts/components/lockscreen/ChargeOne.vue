@@ -1,42 +1,54 @@
 <script setup>
 import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { useLayoutThemeStore } from '@/store/layout/layoutTheme.js'
 
 const props = defineProps({
   battery: {
     type: Object,
-    default: () => ({})
-  }
+    default: () => ({}),
+  },
 })
+
+const { t } = useI18n()
+const layoutThemeStore = useLayoutThemeStore()
+const language = computed(() => layoutThemeStore.layoutSetting.language)
 
 const batteryStatus = computed(() => {
   if (props.battery.charging) {
     if (props.battery.level >= 1) {
-      return '已充满'
+      return t('setting.fullCharge')
     } else {
-      return '充电中'
+      return t('setting.charging')
     }
   } else {
-    return '已断开电源'
+    return t('setting.powerSupplyDisconnected')
   }
 })
 const calcDischargingTime = computed(() => {
-  if (Number.isFinite(props.battery.dischargingTime) && props.battery.dischargingTime !== 0) {
+  if (
+    Number.isFinite(props.battery.dischargingTime) &&
+    props.battery.dischargingTime !== 0
+  ) {
     const time = props.battery.dischargingTime / 60
     const hour = Math.floor(time / 60)
     const minute = Math.floor(time % 60)
-    return `${hour}小时${minute}分钟`
+    return `${hour}${t('unit.hour')}${minute}${t('unit.minute')}`
   } else {
-    return '未知'
+    return t('setting.unKnown')
   }
 })
 const calcChargingTime = computed(() => {
-  if (Number.isFinite(props.battery.chargingTime) && props.battery.chargingTime !== 0) {
+  if (
+    Number.isFinite(props.battery.chargingTime) &&
+    props.battery.chargingTime !== 0
+  ) {
     const time = props.battery.chargingTime / 60
     const hour = Math.floor(time / 60)
     const minute = Math.floor(time % 60)
-    return `${hour}小时${minute}分钟`
+    return `${hour}${t('unit.hour')}${minute}${t('unit.minute')}`
   } else {
-    return '未知'
+    return t('setting.unKnown')
   }
 })
 </script>
@@ -44,12 +56,23 @@ const calcChargingTime = computed(() => {
 <template>
   <div class="charging">
     <div>{{ batteryStatus }}</div>
-    <div v-if="calcDischargingTime !== '未知'">剩余可使用时间：{{ calcDischargingTime }}</div>
-    <div v-if="calcChargingTime !== '未知'">距离电池充满需要：{{ calcChargingTime }}</div>
+    <div v-if="calcDischargingTime !== t('setting.unKnown')">
+      {{ t('setting.remainingAvailableTime') }}
+      {{ language === 'zh-CN' ? '：' : ':' }}：
+      {{ calcDischargingTime }}
+    </div>
+    <div v-if="calcChargingTime !== t('setting.unKnown')">
+      {{ t('setting.distanceBatteryChargeFull') }}
+      {{ language === 'zh-CN' ? '：' : ':' }}
+      {{ calcChargingTime }}
+    </div>
   </div>
   <div class="charge">
     <div v-for="i in 3" :key="i" class="outer">
-      <div class="circle" :style="{ transform: `scale(${1.01 - 0.04 * (i - 1)})` }" />
+      <div
+        class="circle"
+        :style="{ transform: `scale(${1.01 - 0.04 * (i - 1)})` }"
+      />
     </div>
     <div class="line-box">
       <div class="line-left" />
@@ -68,12 +91,14 @@ const calcChargingTime = computed(() => {
         class="circle-white"
         :style="{
           transform: `scale(${1 - 0.02 * (i - 1)})`,
-          animationDuration: `${500 - 20 * (i - 1)}ms`
+          animationDuration: `${500 - 20 * (i - 1)}ms`,
         }"
       />
     </div>
     <div class="outer">
-      <div class="text">{{ (battery.level * 100).toFixed(0) }}<span class="sub">%</span></div>
+      <div class="text">
+        {{ (battery.level * 100).toFixed(0) }}<span class="sub">%</span>
+      </div>
     </div>
     <div class="light" />
   </div>

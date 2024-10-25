@@ -6,11 +6,11 @@ import MenuItemContent from '@/layouts/components/menu/MenuItemContent.vue'
 defineProps({
   item: {
     type: Object,
-    default: () => ({})
-  }
+    default: () => ({}),
+  },
 })
 
-const isShowSubMenu = (menuItem) => menuItem?.children?.length
+const isShowSubMenu = menuItem => menuItem?.children?.length
 </script>
 
 <template>

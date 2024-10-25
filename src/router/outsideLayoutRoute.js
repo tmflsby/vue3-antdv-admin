@@ -4,8 +4,8 @@ const LoginRoute = {
   name: 'Login',
   component: () => import('@/views/login/LoginView.vue'),
   meta: {
-    title: '登录'
-  }
+    title: 'route.login',
+  },
 }
 
 // 404
@@ -14,8 +14,8 @@ const NotFoundRoute = {
   name: 'NotFound',
   component: () => import('@/views/404/NotFoundView.vue'),
   meta: {
-    title: '404'
-  }
+    title: 'route.404',
+  },
 }
 
 export default [LoginRoute, NotFoundRoute]

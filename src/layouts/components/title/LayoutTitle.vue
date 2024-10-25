@@ -4,8 +4,8 @@ import { useLayoutThemeStore } from '@/store/layout/layoutTheme.js'
 
 defineProps({
   collapsed: {
-    type: Boolean
-  }
+    type: Boolean,
+  },
 })
 
 const layoutThemeStore = useLayoutThemeStore()
@@ -17,13 +17,16 @@ const style = computed(() => {
   return {
     paddingLeft: '10px',
     height: `var(--app-header-height)`,
-    color: titleColor.value
+    color: titleColor.value,
   }
 })
 </script>
 
 <template>
-  <div class="flex-cc overflow-hidden whitespace-nowrap font-500 text-20px" :style="style">
+  <div
+    class="flex-cc overflow-hidden whitespace-nowrap font-500 text-20px"
+    :style="style"
+  >
     <img class="h32px mr10px" src="~@/assets/images/logo.png" alt="" />
     <div v-show="!collapsed">
       {{ title }}

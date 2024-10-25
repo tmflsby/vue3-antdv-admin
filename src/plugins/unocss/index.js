@@ -1,3 +1,3 @@
 import 'virtual:uno.css'
 
-export const setupUnoCSS = () => ({})
+export const setupUnoCSS = () => {}

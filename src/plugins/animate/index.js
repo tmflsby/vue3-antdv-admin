@@ -1,3 +1,3 @@
 import 'animate.css'
 
-export const setupAnimate = () => ({})
+export const setupAnimate = () => {}
