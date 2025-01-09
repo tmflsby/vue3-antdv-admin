@@ -7,7 +7,7 @@ import { useLayoutThemeStore } from '@/store/layout/layoutTheme.js'
 const { t } = useI18n()
 const layoutThemeStore = useLayoutThemeStore()
 
-const changeLocaleLanguage = language => {
+const changeLocaleLanguage = (language) => {
   layoutThemeStore.updateLayoutSetting({ language })
 }
 </script>

@@ -26,10 +26,7 @@ const batteryStatus = computed(() => {
   }
 })
 const calcDischargingTime = computed(() => {
-  if (
-    Number.isFinite(props.battery.dischargingTime) &&
-    props.battery.dischargingTime !== 0
-  ) {
+  if (Number.isFinite(props.battery.dischargingTime) && props.battery.dischargingTime !== 0) {
     const time = props.battery.dischargingTime / 60
     const hour = Math.floor(time / 60)
     const minute = Math.floor(time % 60)
@@ -39,10 +36,7 @@ const calcDischargingTime = computed(() => {
   }
 })
 const calcChargingTime = computed(() => {
-  if (
-    Number.isFinite(props.battery.chargingTime) &&
-    props.battery.chargingTime !== 0
-  ) {
+  if (Number.isFinite(props.battery.chargingTime) && props.battery.chargingTime !== 0) {
     const time = props.battery.chargingTime / 60
     const hour = Math.floor(time / 60)
     const minute = Math.floor(time % 60)
@@ -69,10 +63,7 @@ const calcChargingTime = computed(() => {
   </div>
   <div class="charge">
     <div v-for="i in 3" :key="i" class="outer">
-      <div
-        class="circle"
-        :style="{ transform: `scale(${1.01 - 0.04 * (i - 1)})` }"
-      />
+      <div class="circle" :style="{ transform: `scale(${1.01 - 0.04 * (i - 1)})` }" />
     </div>
     <div class="line-box">
       <div class="line-left" />
@@ -96,9 +87,7 @@ const calcChargingTime = computed(() => {
       />
     </div>
     <div class="outer">
-      <div class="text">
-        {{ (battery.level * 100).toFixed(0) }}<span class="sub">%</span>
-      </div>
+      <div class="text">{{ (battery.level * 100).toFixed(0) }}<span class="sub">%</span></div>
     </div>
     <div class="light" />
   </div>

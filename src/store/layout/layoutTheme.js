@@ -57,7 +57,7 @@ export const useLayoutThemeStore = defineStore(
         }
         if (newVal.animation !== oldVal.animation) {
           layoutSetting.animationDirection = animations.find(
-            item => item.animation === layoutSetting.animation,
+            (item) => item.animation === layoutSetting.animation,
           ).options[0]
         }
         if (newVal.borderRadius !== oldVal.borderRadius) {
@@ -72,7 +72,7 @@ export const useLayoutThemeStore = defineStore(
       },
     )
 
-    const updateLayoutSetting = settings => {
+    const updateLayoutSetting = (settings) => {
       Object.assign(layoutSetting, settings)
     }
 
@@ -325,9 +325,7 @@ export const useLayoutThemeStore = defineStore(
       }
       return headerBackground
     })
-    const headerColor = computed(() =>
-      headerBackground.value === '#fff' ? '#000' : '#fff',
-    )
+    const headerColor = computed(() => (headerBackground.value === '#fff' ? '#000' : '#fff'))
 
     return {
       layoutSetting,

@@ -35,10 +35,8 @@ watch(
 const handleSearchMenu = useDebounceFn(() => searchMenu(), 300)
 const searchMenu = () => {
   if (keyword.value) {
-    resultOptions.value = menuList.value.filter(item =>
-      item.searchTitle
-        ?.toLocaleLowerCase()
-        .includes(keyword.value.toLocaleLowerCase().trim()),
+    resultOptions.value = menuList.value.filter((item) =>
+      item.searchTitle?.toLocaleLowerCase().includes(keyword.value.toLocaleLowerCase().trim()),
     )
     activeKey.value = resultOptions.value[0]?.name
   } else {
@@ -65,9 +63,7 @@ onKeyStroke('Escape', () => {
 onKeyStroke('ArrowUp', () => {
   const { length } = resultOptions.value
   if (!length) return
-  const index = resultOptions.value.findIndex(
-    item => item.name === activeKey.value,
-  )
+  const index = resultOptions.value.findIndex((item) => item.name === activeKey.value)
   if (index === 0) {
     activeKey.value = resultOptions.value[length - 1].name
   } else {
@@ -77,9 +73,7 @@ onKeyStroke('ArrowUp', () => {
 onKeyStroke('ArrowDown', () => {
   const { length } = resultOptions.value
   if (!length) return
-  const index = resultOptions.value.findIndex(
-    item => item.name === activeKey.value,
-  )
+  const index = resultOptions.value.findIndex((item) => item.name === activeKey.value)
   if (index === length - 1) {
     activeKey.value = resultOptions.value[0].name
   } else {
@@ -144,9 +138,7 @@ onKeyStroke('ArrowDown', () => {
               {{ t('setting.close') }}
             </a-space-compact>
           </a-space>
-          <span v-if="resultOptions.length > 0"
-            >共{{ resultOptions.length }}项</span
-          >
+          <span v-if="resultOptions.length > 0">共{{ resultOptions.length }}项</span>
         </div>
       </template>
     </a-modal>

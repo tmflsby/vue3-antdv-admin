@@ -2,13 +2,9 @@ import { defineStore } from 'pinia'
 import { ref, computed, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-import {
-  useIntervalFn,
-  useBattery,
-  useOnline,
-  useResizeObserver,
-} from '@vueuse/core'
+import { useIntervalFn, useBattery, useOnline, useResizeObserver } from '@vueuse/core'
 import { useLayoutThemeStore } from '@/store/layout/layoutTheme.js'
+import { uuid } from '@/utils/uuid.js'
 import dayjs from 'dayjs'
 
 export const useSystemStore = defineStore(
@@ -21,14 +17,14 @@ export const useSystemStore = defineStore(
 
     const menus = ref(
       router.options.routes
-        .find(item => item.name === 'Layout')
-        .children.filter(item => item.name !== 'Refresh'),
+        .find((item) => item.name === 'Layout')
+        .children.filter((item) => item.name !== 'Refresh'),
     )
 
     // menus 平铺
     const menuList = ref([])
     const getMenuList = (menu, parent) => {
-      menu.forEach(item => {
+      menu.forEach((item) => {
         item.searchTitle = t(item.meta.title)
         if (item.children) {
           getMenuList(item.children, item)
@@ -48,7 +44,7 @@ export const useSystemStore = defineStore(
           menus.value.push(route)
           break
         case 'delete':
-          menus.value = menus.value.filter(item => item.name !== route.name)
+          menus.value = menus.value.filter((item) => item.name !== route.name)
           break
         default:
           break
@@ -66,32 +62,26 @@ export const useSystemStore = defineStore(
     )
 
     const tabsList = ref([])
-    const getTabsList = computed(() =>
-      tabsList.value.filter(item => router.hasRoute(item.name)),
-    )
+    const getTabsList = computed(() => tabsList.value.filter((item) => router.hasRoute(item.name)))
     const getCurrentTab = computed(() =>
-      tabsList.value.find(item => item.fullPath === currentRoute.fullPath),
+      tabsList.value.find((item) => item.fullPath === currentRoute.fullPath),
     )
 
     let keepAliveList = ref([])
-    const addKeepAliveList = name => {
+    const addKeepAliveList = (name) => {
       if (typeof name === 'string') {
         !keepAliveList.value.includes(name) && keepAliveList.value.push(name)
       } else {
-        name.forEach(item => {
-          item &&
-            !keepAliveList.value.includes(item) &&
-            keepAliveList.value.push(item)
+        name.forEach((item) => {
+          item && !keepAliveList.value.includes(item) && keepAliveList.value.push(item)
         })
       }
     }
-    const removeKeepAliveList = name => {
+    const removeKeepAliveList = (name) => {
       if (typeof name === 'string') {
-        keepAliveList.value = keepAliveList.value.filter(item => item !== name)
+        keepAliveList.value = keepAliveList.value.filter((item) => item !== name)
       } else {
-        keepAliveList.value = keepAliveList.value.filter(
-          item => !name.includes(item),
-        )
+        keepAliveList.value = keepAliveList.value.filter((item) => !name.includes(item))
       }
     }
     const clearKeepAliveList = () => {
@@ -99,20 +89,20 @@ export const useSystemStore = defineStore(
     }
 
     // 获取原始路由信息
-    const getRawRoute = route => ({
+    const getRawRoute = (route) => ({
       ...route,
-      matched: route.matched.map(item => {
+      matched: route.matched.map((item) => {
         const { meta, path, name } = item
         return { meta, path, name }
       }),
     })
     // 将已关闭的标签页的组件从keep-alive中移除
-    const delCompFromClosedTabs = closedTabs => {
+    const delCompFromClosedTabs = (closedTabs) => {
       const routes = router.getRoutes()
       const compNames = closedTabs.reduce((acc, cur) => {
         if (cur.name && router.hasRoute(cur.name)) {
-          const componentName = routes.find(item => item.name === cur.name)
-            ?.components?.default?.name
+          const componentName = routes.find((item) => item.name === cur.name)?.components?.default
+            ?.name
           componentName && acc.push(componentName)
         }
         return acc
@@ -120,50 +110,36 @@ export const useSystemStore = defineStore(
       removeKeepAliveList(compNames)
     }
     // 添加tabs
-    const addTabs = route => {
-      const isExist = tabsList.value.some(
-        item => item.fullPath === route.fullPath,
-      )
+    const addTabs = (route) => {
+      const isExist = tabsList.value.some((item) => item.fullPath === route.fullPath)
       if (!isExist) {
         tabsList.value.push(getRawRoute(route))
       }
     }
     // 关闭当前tab
-    const closeCurrentTab = route => {
-      const index = tabsList.value.findIndex(
-        item => item.fullPath === route.fullPath,
-      )
-      const isDelCurrentTab = Object.is(
-        getCurrentTab.value,
-        tabsList.value[index],
-      )
+    const closeCurrentTab = (route) => {
+      const index = tabsList.value.findIndex((item) => item.fullPath === route.fullPath)
+      const isDelCurrentTab = Object.is(getCurrentTab.value, tabsList.value[index])
       delCompFromClosedTabs(tabsList.value.splice(index, 1))
       // 如果关闭的tab就是当前激活的tab，则重定向页面
       if (isDelCurrentTab) {
-        const currentRoute =
-          tabsList.value[Math.max(0, tabsList.value.length - 1)]
+        const currentRoute = tabsList.value[Math.max(0, tabsList.value.length - 1)]
         router.push(currentRoute)
       }
     }
     // 关闭左侧tabs
-    const closeLeftTabs = route => {
-      const index = tabsList.value.findIndex(
-        item => item.fullPath === route.fullPath,
-      )
+    const closeLeftTabs = (route) => {
+      const index = tabsList.value.findIndex((item) => item.fullPath === route.fullPath)
       delCompFromClosedTabs(tabsList.value.splice(0, index))
     }
     // 关闭右侧tabs
-    const closeRightTabs = route => {
-      const index = tabsList.value.findIndex(
-        item => item.fullPath === route.fullPath,
-      )
+    const closeRightTabs = (route) => {
+      const index = tabsList.value.findIndex((item) => item.fullPath === route.fullPath)
       delCompFromClosedTabs(tabsList.value.splice(index + 1))
     }
     // 关闭其他tabs
-    const closeOtherTabs = route => {
-      const index = tabsList.value.findIndex(
-        item => item.fullPath === route.fullPath,
-      )
+    const closeOtherTabs = (route) => {
+      const index = tabsList.value.findIndex((item) => item.fullPath === route.fullPath)
       if (index !== -1) {
         const current = tabsList.value.splice(index, 1)
         delCompFromClosedTabs(tabsList.value)
@@ -190,9 +166,7 @@ export const useSystemStore = defineStore(
 
     window.addEventListener('beforeunload', () => {
       if (!layoutThemeStore.layoutSetting.cacheTabs) {
-        tabsList.value = [getCurrentTab.value || tabsList.value[0]].filter(
-          Boolean,
-        )
+        tabsList.value = [getCurrentTab.value || tabsList.value[0]].filter(Boolean)
       }
     })
 
@@ -216,29 +190,26 @@ export const useSystemStore = defineStore(
 
     const lockScreenPassword = ref('')
     const lockScreenState = ref(false)
-    const lockScreenTime = computed(
-      () => layoutThemeStore.layoutSetting.lockScreenTime * 60 * 60,
-    )
+    const lockScreenTime = computed(() => layoutThemeStore.layoutSetting.lockScreenTime * 60 * 60)
     const lockScreenCounter = ref(0)
     setInterval(() => {
       lockScreenCounter.value += 1
     }, 1000)
 
-    const setLockScreenState = state => {
+    const setLockScreenState = (state) => {
       lockScreenState.value = state
       if (!state) {
         resetLockScreenPassword()
         lockScreenCounter.value = 0
       }
     }
-    const setLockScreenPassword = password => {
+    const setLockScreenPassword = (password) => {
       lockScreenPassword.value = encodeURI(password)
     }
     const resetLockScreenPassword = () => {
       lockScreenPassword.value = ''
     }
-    const verifyLockScreenPassword = password =>
-      encodeURI(password) === lockScreenPassword.value
+    const verifyLockScreenPassword = (password) => encodeURI(password) === lockScreenPassword.value
     // 解码
     const decodeLockScreenPassword = () => decodeURI(lockScreenPassword.value)
 
@@ -266,7 +237,7 @@ export const useSystemStore = defineStore(
     const online = useOnline()
 
     const device = ref('desktop')
-    useResizeObserver(document.body, entries => {
+    useResizeObserver(document.body, (entries) => {
       const entry = entries[0]
       const { width } = entry.contentRect
       device.value = width < 992 ? 'mobile' : 'desktop'
@@ -278,8 +249,8 @@ export const useSystemStore = defineStore(
       location.reload()
 
       menus.value = router.options.routes
-        .find(item => item.name === 'Layout')
-        .children.filter(item => item.name !== 'Refresh')
+        .find((item) => item.name === 'Layout')
+        .children.filter((item) => item.name !== 'Refresh')
       menuList.value = []
       getMenuList(menus.value)
 
@@ -288,6 +259,11 @@ export const useSystemStore = defineStore(
 
       tabsList.value = []
       keepAliveList.value = []
+    }
+
+    const pageKey = ref(uuid())
+    const setPageKey = () => {
+      pageKey.value = uuid()
     }
 
     return {
@@ -303,6 +279,7 @@ export const useSystemStore = defineStore(
       battery,
       online,
       device,
+      pageKey,
       updateMenus,
       addTabs,
       closeCurrentTab,
@@ -318,6 +295,7 @@ export const useSystemStore = defineStore(
       verifyLockScreenPassword,
       decodeLockScreenPassword,
       clearCacheReload,
+      setPageKey,
     }
   },
   {

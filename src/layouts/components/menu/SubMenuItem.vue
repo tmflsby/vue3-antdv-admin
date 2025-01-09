@@ -10,7 +10,7 @@ defineProps({
   },
 })
 
-const isShowSubMenu = menuItem => menuItem?.children?.length
+const isShowSubMenu = (menuItem) => menuItem?.children?.length
 </script>
 
 <template>

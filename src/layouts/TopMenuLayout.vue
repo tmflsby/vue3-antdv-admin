@@ -15,9 +15,7 @@ const showTitle = computed(() => layoutSetting.showTitle)
 const showHeader = computed(() => layoutSetting.showHeader)
 const showFooter = computed(() => layoutSetting.showFooter)
 const watermark = computed(() => layoutSetting.watermark)
-const watermarkArea_content = computed(
-  () => layoutSetting.watermarkArea === 'content',
-)
+const watermarkArea_content = computed(() => layoutSetting.watermarkArea === 'content')
 const watermarkText = computed(() => layoutSetting.watermarkText)
 </script>
 
@@ -33,10 +31,7 @@ const watermarkText = computed(() => layoutSetting.watermarkText)
     </LayoutHeader>
     <a-layout-content>
       <LayoutTabs />
-      <a-watermark
-        v-if="watermark && watermarkArea_content"
-        :content="watermarkText"
-      >
+      <a-watermark v-if="watermark && watermarkArea_content" :content="watermarkText">
         <LayoutPage />
       </a-watermark>
       <LayoutPage v-else />

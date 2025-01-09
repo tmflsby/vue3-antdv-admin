@@ -3,12 +3,7 @@ import { ref, computed } from 'vue'
 import { message } from 'ant-design-vue'
 import { SettingOutlined } from '@ant-design/icons-vue'
 import { useI18n } from 'vue-i18n'
-import {
-  layouts,
-  themeColors,
-  uiSettings,
-  animations,
-} from '@/settings/layoutTheme.js'
+import { layouts, themeColors, uiSettings, animations } from '@/settings/layoutTheme.js'
 import { useLayoutThemeStore } from '@/store/layout/layoutTheme.js'
 import { useSystemStore } from '@/store/layout/system.js'
 
@@ -27,16 +22,15 @@ const showDrawer = () => {
   visible.value = true
 }
 
-const setLayout = layout => {
+const setLayout = (layout) => {
   layoutThemeStore.updateLayoutSetting({ layout })
 }
 
-const setThemeColor = colorPrimary => {
+const setThemeColor = (colorPrimary) => {
   layoutThemeStore.updateLayoutSetting({ colorPrimary })
 }
 
-const getThemeColorVisible = color =>
-  colorPrimary.value === color ? 'visible' : 'hidden'
+const getThemeColorVisible = (color) => (colorPrimary.value === color ? 'visible' : 'hidden')
 
 const copySettings = () => {
   const settings = JSON.stringify(layoutSetting.value)
@@ -44,7 +38,7 @@ const copySettings = () => {
   message.success(t('message.copySuccess'))
 }
 
-const handleColorPickerInput = e => {
+const handleColorPickerInput = (e) => {
   setThemeColor(e.target.value)
 }
 </script>
@@ -53,11 +47,7 @@ const handleColorPickerInput = e => {
   <a-tooltip :title="t('setting.projectConfig')" :placement="'bottomRight'">
     <SettingOutlined @click="showDrawer" />
   </a-tooltip>
-  <a-drawer
-    v-model:open="visible"
-    placement="right"
-    :title="t('setting.projectConfig')"
-  >
+  <a-drawer v-model:open="visible" placement="right" :title="t('setting.projectConfig')">
     <a-descriptions :title="t('setting.menuLayout')" :column="5">
       <a-descriptions-item v-for="item in layouts" :key="item.value">
         <a-tooltip :title="t(item.label)">
@@ -73,17 +63,12 @@ const handleColorPickerInput = e => {
         </a-tooltip>
       </a-descriptions-item>
     </a-descriptions>
-    <a-descriptions
-      :title="t('setting.themeColor')"
-      :column="themeColors.length - 1"
-    >
+    <a-descriptions :title="t('setting.themeColor')" :column="themeColors.length - 1">
       <a-descriptions-item v-for="item in themeColors" :key="item.key">
         <div class="style-checkbox-item" v-if="item.tag === 'checkbox'">
           <a-tooltip :title="t(item.title)">
             <a-tag :color="item.value" @click="setThemeColor(item.value)">
-              <span :style="{ visibility: getThemeColorVisible(item.value) }">
-                ✔
-              </span>
+              <span :style="{ visibility: getThemeColorVisible(item.value) }"> ✔ </span>
             </a-tag>
           </a-tooltip>
         </div>
@@ -101,9 +86,7 @@ const handleColorPickerInput = e => {
               v-model="colorPrimary"
               @input="handleColorPickerInput"
             />
-            <span :style="{ visibility: getThemeColorVisible(colorPrimary) }">
-              ✔
-            </span>
+            <span :style="{ visibility: getThemeColorVisible(colorPrimary) }"> ✔ </span>
           </a-tag>
         </a-flex>
       </a-descriptions-item>
@@ -138,10 +121,7 @@ const handleColorPickerInput = e => {
           v-if="item.tag === 'input'"
         >
           {{ t(item.label) }}
-          <a-input
-            style="width: 200px"
-            v-model:value="layoutSetting[item.value]"
-          />
+          <a-input style="width: 200px" v-model:value="layoutSetting[item.value]" />
         </a-flex>
         <a-flex
           justify="space-between"
@@ -164,24 +144,14 @@ const handleColorPickerInput = e => {
             v-model:value="layoutSetting.animationDirection"
           >
             <a-select-option
-              v-for="val in animations.find(
-                i => i.animation === layoutSetting.animation,
-              ).options"
+              v-for="val in animations.find((i) => i.animation === layoutSetting.animation).options"
               :key="val"
             >
               {{ val }}
             </a-select-option>
           </a-select>
-          <a-select
-            v-else
-            style="width: 200px"
-            v-model:value="layoutSetting[item.value]"
-          >
-            <a-select-option
-              v-for="val in item.options"
-              :key="val.value"
-              :value="val.value"
-            >
+          <a-select v-else style="width: 200px" v-model:value="layoutSetting[item.value]">
+            <a-select-option v-for="val in item.options" :key="val.value" :value="val.value">
               {{ t(val.label) }}
             </a-select-option>
           </a-select>
@@ -195,7 +165,7 @@ const handleColorPickerInput = e => {
           <a-segmented
             v-model:value="layoutSetting[item.value]"
             :options="
-              item.options.map(option => ({
+              item.options.map((option) => ({
                 value: option.value,
                 label: t(option.label),
               }))
@@ -209,12 +179,7 @@ const handleColorPickerInput = e => {
         <a-button class="w-45%" type="primary" @click="copySettings">
           {{ t('setting.copy') }}
         </a-button>
-        <a-button
-          class="w-45%"
-          type="primary"
-          danger
-          @click="systemStore.clearCacheReload"
-        >
+        <a-button class="w-45%" type="primary" danger @click="systemStore.clearCacheReload">
           {{ t('setting.clearCacheAndReset') }}
         </a-button>
       </div>

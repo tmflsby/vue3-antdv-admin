@@ -19,7 +19,7 @@ const formState = ref({
 })
 
 // 随机验证码 大小写字母 数字
-const randomCode = strLen => {
+const randomCode = (strLen) => {
   const code = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
   let str = ''
   for (let i = 0; i < strLen; i++) {
@@ -29,12 +29,9 @@ const randomCode = strLen => {
 }
 const imageCode = ref(randomCode(4))
 
-const onFinish = values => {
+const onFinish = (values) => {
   console.log('Success:', values)
-  if (
-    formState.value.verifyCode.toLocaleLowerCase() !==
-    imageCode.value.toLocaleLowerCase()
-  ) {
+  if (formState.value.verifyCode.toLocaleLowerCase() !== imageCode.value.toLocaleLowerCase()) {
     message.error(t('message.verifyCodeError'))
     imageCode.value = randomCode(4)
     formState.value.verifyCode = ''
@@ -49,7 +46,7 @@ const onFinish = values => {
   // 测试动态路由（在这里动态增加路由）
 }
 
-const onFinishFailed = errorInfo => {
+const onFinishFailed = (errorInfo) => {
   console.log('Failed:', errorInfo)
 }
 </script>

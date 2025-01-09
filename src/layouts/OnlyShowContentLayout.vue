@@ -7,19 +7,14 @@ import LayoutPage from '@/layouts/components/page/LayoutPage.vue'
 const layoutThemeStore = useLayoutThemeStore()
 const layoutSetting = layoutThemeStore.layoutSetting
 const watermark = computed(() => layoutSetting.watermark)
-const watermarkArea_content = computed(
-  () => layoutSetting.watermarkArea === 'content',
-)
+const watermarkArea_content = computed(() => layoutSetting.watermarkArea === 'content')
 const watermarkText = computed(() => layoutSetting.watermarkText)
 const showSetting = computed(() => layoutSetting.showSetting)
 </script>
 
 <template>
   <a-layout class="h100vh overflow-hidden">
-    <a-watermark
-      v-if="watermark && watermarkArea_content"
-      :content="watermarkText"
-    >
+    <a-watermark v-if="watermark && watermarkArea_content" :content="watermarkText">
       <LayoutPage />
     </a-watermark>
     <LayoutPage v-else />

@@ -64,9 +64,7 @@ const hintPassword = () => {
   )
 }
 
-const chargeComponent = computed(() =>
-  Math.random() > 0.5 ? ChargeOne : ChargeTwo,
-)
+const chargeComponent = computed(() => (Math.random() > 0.5 ? ChargeOne : ChargeTwo))
 
 const batteryBar = computed(() => {
   const num = battery.value.level * 100
@@ -128,11 +126,7 @@ const handleSubmitPassword = () => {
     <template v-if="!isShowForm">
       <div class="lock-box">
         <div class="lock">
-          <span
-            class="lock-icon"
-            :title="t('setting.unlockScreen')"
-            @click="isShowForm = true"
-          >
+          <span class="lock-icon" :title="t('setting.unlockScreen')" @click="isShowForm = true">
             <LockOutlined :style="{ fontSize: '24px' }" />
           </span>
         </div>
@@ -143,13 +137,9 @@ const handleSubmitPassword = () => {
         <div class="time">
           {{ systemTime.hour < 10 ? '0' + systemTime.hour : systemTime.hour }}
           :
-          {{
-            systemTime.minute < 10 ? '0' + systemTime.minute : systemTime.minute
-          }}
+          {{ systemTime.minute < 10 ? '0' + systemTime.minute : systemTime.minute }}
           :
-          {{
-            systemTime.second < 10 ? '0' + systemTime.second : systemTime.second
-          }}
+          {{ systemTime.second < 10 ? '0' + systemTime.second : systemTime.second }}
         </div>
         <div class="date">
           {{ systemTime.year }}/{{ systemTime.month }}/{{ systemTime.day }}
@@ -157,16 +147,8 @@ const handleSubmitPassword = () => {
         </div>
       </div>
       <div class="computer-status">
-        <Icon
-          class="iconify anticon"
-          icon="material-symbols:wifi"
-          v-if="systemStore.online"
-        />
-        <Icon
-          class="iconify anticon"
-          icon="material-symbols:wifi-off"
-          v-if="!systemStore.online"
-        />
+        <Icon class="iconify anticon" icon="material-symbols:wifi" v-if="systemStore.online" />
+        <Icon class="iconify anticon" icon="material-symbols:wifi-off" v-if="!systemStore.online" />
         <Icon
           class="iconify anticon"
           :icon="`material-symbols:battery-${batteryCharging}-rounded`"

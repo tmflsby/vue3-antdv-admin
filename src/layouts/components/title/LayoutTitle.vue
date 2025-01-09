@@ -23,10 +23,7 @@ const style = computed(() => {
 </script>
 
 <template>
-  <div
-    class="flex-cc overflow-hidden whitespace-nowrap font-500 text-20px"
-    :style="style"
-  >
+  <div class="flex-cc overflow-hidden whitespace-nowrap font-500 text-20px" :style="style">
     <img class="h32px mr10px" src="~@/assets/images/logo.png" alt="" />
     <div v-show="!collapsed">
       {{ title }}

@@ -5,24 +5,26 @@ const request = axios.create({})
 
 // 请求拦截器
 request.interceptors.request.use(
-  config => {
+  (config) => {
     // 添加请求参数序列化
     config.paramsSerializer = {
-      serialize: params => qs.stringify(params, { arrayFormat: 'repeat' }),
+      serialize: (params) => qs.stringify(params, { arrayFormat: 'repeat' }),
     }
     return config
   },
-  error => {
+  (error) => {
     return Promise.reject(error)
   },
 )
 
 // 响应拦截器
 request.interceptors.response.use(
-  response => {
+  (response) => {
     return response
   },
-  error => {
+  (error) => {
     return Promise.reject(error)
   },
 )
+
+export default request

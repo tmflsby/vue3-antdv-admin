@@ -17,9 +17,7 @@ const showHeader = computed(() => layoutSetting.showHeader)
 const showFooter = computed(() => layoutSetting.showFooter)
 const sidemenuWidth = computed(() => layoutSetting.sidemenuWidth)
 const watermark = computed(() => layoutSetting.watermark)
-const watermarkArea_content = computed(
-  () => layoutSetting.watermarkArea === 'content',
-)
+const watermarkArea_content = computed(() => layoutSetting.watermarkArea === 'content')
 const watermarkText = computed(() => layoutSetting.watermarkText)
 const border = computed(() => layoutThemeStore.border)
 </script>
@@ -46,10 +44,7 @@ const border = computed(() => layoutThemeStore.border)
       <a-layout>
         <a-layout-content>
           <LayoutTabs />
-          <a-watermark
-            v-if="watermark && watermarkArea_content"
-            :content="watermarkText"
-          >
+          <a-watermark v-if="watermark && watermarkArea_content" :content="watermarkText">
             <LayoutPage />
           </a-watermark>
           <LayoutPage v-else />

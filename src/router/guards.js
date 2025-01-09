@@ -2,16 +2,16 @@ import NProgress from 'nprogress'
 import { useSystemStore } from '@/store/layout/system.js'
 import { useLayoutThemeStore } from '@/store/layout/layoutTheme.js'
 
-const getComponentName = route => {
+const getComponentName = (route) => {
   return route.matched
-    .map(item => {
+    .map((item) => {
       if (!item.meta?.keepAlive || item.redirect) return
       return item.name
     })
     .filter(Boolean)
 }
 
-export const routerGuards = router => {
+export const routerGuards = (router) => {
   router.beforeEach((to, from, next) => {
     const layoutThemeStore = useLayoutThemeStore()
     if (layoutThemeStore.layoutSetting.showProgress) {
@@ -20,7 +20,7 @@ export const routerGuards = router => {
     next()
   })
 
-  router.afterEach(to => {
+  router.afterEach((to) => {
     const layoutThemeStore = useLayoutThemeStore()
     if (layoutThemeStore.layoutSetting.showProgress) {
       NProgress.done()

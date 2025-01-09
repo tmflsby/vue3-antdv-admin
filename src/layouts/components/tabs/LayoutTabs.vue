@@ -26,13 +26,13 @@ const activeKey = ref(route.fullPath)
 
 watch(
   () => route.fullPath,
-  val => {
+  (val) => {
     activeKey.value = val
   },
 )
 
 const itemRefs = {}
-const changePage = key => {
+const changePage = (key) => {
   Object.is(route.fullPath, key) || router.push(key)
 }
 const editTabItem = (targetKey, action) => {
@@ -41,14 +41,10 @@ const editTabItem = (targetKey, action) => {
   }
 }
 
-const background = computed(() =>
-  layoutSetting.algorithm === 'darkAlgorithm' ? 'black' : 'white',
-)
+const background = computed(() => (layoutSetting.algorithm === 'darkAlgorithm' ? 'black' : 'white'))
 const borderRadius = computed(() => `${layoutSetting.borderRadius}px`)
 const border = computed(() =>
-  layoutSetting.algorithm === 'darkAlgorithm'
-    ? '1px solid black'
-    : '1px solid #eee',
+  layoutSetting.algorithm === 'darkAlgorithm' ? '1px solid black' : '1px solid #eee',
 )
 
 const tabBarStyle = ref({
@@ -74,15 +70,9 @@ const tabBarStyle = ref({
       @change="changePage"
       @edit="editTabItem"
     >
-      <a-tab-pane
-        v-for="tabItem in systemStore.getTabsList"
-        :key="tabItem.fullPath"
-      >
+      <a-tab-pane v-for="tabItem in systemStore.getTabsList" :key="tabItem.fullPath">
         <template #tab>
-          <TabsOperator
-            :ref="ins => (itemRefs[tabItem.fullPath] = ins)"
-            :tabItem="tabItem"
-          />
+          <TabsOperator :ref="(ins) => (itemRefs[tabItem.fullPath] = ins)" :tabItem="tabItem" />
         </template>
       </a-tab-pane>
       <template #rightExtra>

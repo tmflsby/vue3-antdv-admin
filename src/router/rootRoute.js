@@ -50,8 +50,7 @@ const RootRoute = {
         {
           path: 'workbench',
           name: 'Workbench',
-          component: () =>
-            import('@/views/example/workbench/WorkbenchView.vue'),
+          component: () => import('@/views/example/workbench/WorkbenchView.vue'),
           meta: {
             title: 'route.workbench',
             icon: 'icon-park-outline:workbench',

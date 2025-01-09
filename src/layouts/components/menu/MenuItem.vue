@@ -10,7 +10,7 @@ defineProps({
 })
 
 const router = useRouter()
-const handleMenuItemClick = item => {
+const handleMenuItemClick = (item) => {
   const { outsideLink } = item.meta || {}
   if (outsideLink) {
     window.open(item.path)

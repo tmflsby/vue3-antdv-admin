@@ -1,9 +1,6 @@
 <script lang="ts" setup>
 import { computed, unref } from 'vue'
-import {
-  FullscreenExitOutlined,
-  FullscreenOutlined,
-} from '@ant-design/icons-vue'
+import { FullscreenExitOutlined, FullscreenOutlined } from '@ant-design/icons-vue'
 import { useI18n } from 'vue-i18n'
 import { useFullscreen } from '@vueuse/core'
 

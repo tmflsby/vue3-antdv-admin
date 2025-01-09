@@ -272,6 +272,11 @@ export const uiSettings = [
     tag: 'switch',
   },
   {
+    label: 'setting.breadcrumbIcon',
+    value: 'showBreadcrumbIcon',
+    tag: 'switch',
+  },
+  {
     label: 'setting.locale',
     value: 'locale',
     tag: 'switch',
@@ -376,6 +381,7 @@ export const defaultSettings = {
   showHeader: true,
   showFooter: true,
   showBreadcrumb: true,
+  showBreadcrumbIcon: true,
   locale: true,
   language: 'zhCN',
   showSetting: true,

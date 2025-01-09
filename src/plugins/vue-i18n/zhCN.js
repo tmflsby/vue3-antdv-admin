@@ -61,6 +61,7 @@ export default {
     cacheTabs: '标签持久化',
     progress: '进度条',
     breadcrumb: '面包屑',
+    breadcrumbIcon: '面包屑图标',
     setting: '设置',
     fullscreen: '全屏',
     exitFullscreen: '退出全屏',

@@ -9,8 +9,7 @@ const dynamicRoutes = [
   {
     path: '/dynamic-route',
     name: 'DynamicRoute',
-    component: () =>
-      import('@/views/example/dynamicRoute/DynamicRouteView.vue'),
+    component: () => import('@/views/example/dynamicRoute/DynamicRouteView.vue'),
     meta: {
       title: 'route.dynamicRoute',
       icon: 'material-symbols:route',
@@ -20,9 +19,9 @@ const dynamicRoutes = [
 ]
 
 const addDynamicRoute = () => {
-  dynamicRoutes.forEach(dynamicRoute => {
+  dynamicRoutes.forEach((dynamicRoute) => {
     const routes = router.getRoutes()
-    const hasRoute = routes.some(route => route.name === dynamicRoute.name)
+    const hasRoute = routes.some((route) => route.name === dynamicRoute.name)
     if (hasRoute) return
     // 动态添加路由
     router.addRoute('Layout', dynamicRoute)
@@ -32,7 +31,7 @@ const addDynamicRoute = () => {
 }
 
 const deleteDynamicRoute = () => {
-  dynamicRoutes.forEach(dynamicRoute => {
+  dynamicRoutes.forEach((dynamicRoute) => {
     // 动态删除路由
     router.removeRoute(dynamicRoute.name)
 
@@ -46,9 +45,7 @@ const deleteDynamicRoute = () => {
   <a-card>
     <a-button-group>
       <a-button type="primary" @click="addDynamicRoute">增加动态路由</a-button>
-      <a-button type="primary" danger @click="deleteDynamicRoute">
-        删除动态路由
-      </a-button>
+      <a-button type="primary" danger @click="deleteDynamicRoute">删除动态路由</a-button>
     </a-button-group>
   </a-card>
 </template>

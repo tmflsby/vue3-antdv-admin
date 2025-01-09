@@ -59,16 +59,10 @@ const layoutHeaderStyle = computed(() => {
     <div :style="{ width: `${sidemenuWidth}px` }" v-if="!layout_sidemenu">
       <slot name="title"></slot>
     </div>
-    <div
-      :style="{ paddingLeft: layout_mixinmenu ? '20px' : 0 }"
-      v-if="!layout_topmenu"
-    >
+    <div :style="{ paddingLeft: layout_mixinmenu ? '20px' : 0 }" v-if="!layout_topmenu">
       <slot name="left"> </slot>
       <a-space :size="20" v-if="!layout_topmenu">
-        <span
-          class="cursor-pointer"
-          @click="() => emit('update:collapsed', !collapsed)"
-        >
+        <span class="cursor-pointer" @click="() => emit('update:collapsed', !collapsed)">
           <component :is="collapsed ? MenuUnfoldOutlined : MenuFoldOutlined" />
         </span>
         <LayoutBreadcrumb v-if="showBreadcrumb" />

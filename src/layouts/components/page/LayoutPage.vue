@@ -7,6 +7,7 @@ import LayoutSetting from '@/layouts/components/setting/LayoutSetting.vue'
 
 const systemStore = useSystemStore()
 const keepAliveList = computed(() => systemStore.keepAliveList)
+const pageKey = computed(() => systemStore.pageKey)
 const layoutSetting = useLayoutThemeStore().layoutSetting
 const onlyShowContent = computed(() => layoutSetting.onlyShowContent)
 const showAnimation = computed(() => layoutSetting.showAnimation)
@@ -53,12 +54,12 @@ const leaveActiveClass = computed(
             @before-leave="overflow = 'hidden'"
           >
             <keep-alive :include="keepAliveList">
-              <component :is="Component" :key="route.fullPath" />
+              <component :is="Component" :key="route.fullPath + pageKey" />
             </keep-alive>
           </Transition>
           <template v-else>
             <keep-alive :include="keepAliveList">
-              <component :is="Component" :key="route.fullPath" />
+              <component :is="Component" :key="route.fullPath + pageKey" />
             </keep-alive>
           </template>
           <template #fallback> 正在加载... </template>

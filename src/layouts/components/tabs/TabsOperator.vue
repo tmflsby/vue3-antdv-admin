@@ -1,7 +1,7 @@
 <script setup>
-import { computed, unref } from 'vue'
+import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useRoute, useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 import { useSystemStore } from '@/store/layout/system.js'
 import { useLayoutThemeStore } from '@/store/layout/layoutTheme.js'
 import { message } from 'ant-design-vue'
@@ -29,7 +29,6 @@ const props = defineProps({
 })
 
 const { t } = useI18n()
-const route = useRoute()
 const router = useRouter()
 const systemStore = useSystemStore()
 const isDevMode = import.meta.env.DEV
@@ -42,18 +41,20 @@ const layoutSetting = layoutThemeStore.layoutSetting
 const tabsIcon = computed(() => layoutSetting.tabsIcon)
 
 // 目标路由是否与当前路由相同
-const isCurrentRoute = route =>
-  router.currentRoute.value.matched.some(item => item.name === route.name)
+const isCurrentRoute = (route) =>
+  router.currentRoute.value.matched.some((item) => item.name === route.name)
 
 const reloadPage = () => {
-  router.replace({
-    name: 'Refresh',
-    path: unref(route).fullPath,
-  })
+  // router.replace({
+  //   name: 'Refresh',
+  //   path: unref(route).fullPath,
+  // })
+
+  // 通过改变页面key来实现重新加载当前页面
+  systemStore.setPageKey()
 }
 const removeTab = () => {
-  if (tabsList.value.length === 1)
-    return message.warning(t('message.lastPageCannotBeClosed'))
+  if (tabsList.value.length === 1) return message.warning(t('message.lastPageCannotBeClosed'))
   systemStore.closeCurrentTab(props.tabItem)
 }
 defineExpose({
@@ -83,7 +84,7 @@ const openPageFile = async () => {
   }
 
   const routes = router.getRoutes()
-  const target = routes.find(n => n.name === props.tabItem.name)
+  const target = routes.find((n) => n.name === props.tabItem.name)
   if (target) {
     const comp = target.components?.default
     let __file = comp?.__file
@@ -117,11 +118,7 @@ const openPageFile = async () => {
     </div>
     <template #overlay>
       <a-menu style="user-select: none">
-        <a-menu-item
-          key="1"
-          :disabled="activeKey !== tabItem.fullPath"
-          @click="reloadPage"
-        >
+        <a-menu-item key="1" :disabled="activeKey !== tabItem.fullPath" @click="reloadPage">
           <ReloadOutlined />
           重新加载
         </a-menu-item>

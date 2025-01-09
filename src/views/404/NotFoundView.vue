@@ -7,11 +7,7 @@ const { t } = useI18n()
 </script>
 
 <template>
-  <a-result
-    status="404"
-    title="404"
-    :sub-title="t('message.sorryPageNotFound')"
-  >
+  <a-result status="404" title="404" :sub-title="t('message.sorryPageNotFound')">
     <template #extra>
       <a-button type="primary" @click="() => router.push('/')">
         {{ t('setting.backToHome') }}

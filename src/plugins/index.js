@@ -7,7 +7,7 @@ import { setupAnimate } from '@/plugins/animate'
 import { setupDayjs } from '@/plugins/dayjs'
 import { setupStyle } from '@/plugins/style'
 
-export const setupPlugins = app => {
+export const setupPlugins = (app) => {
   setupAntDesignVue()
   setupVueI18n(app)
   setupUnoCSS()

@@ -21,3 +21,8 @@ export const hexToRgba = (hex, alpha = 1) => {
 // 使用示例
 // console.log(hexToRgba('#ff5733')) // 输出: "rgba(255,87,51,1)"
 // console.log(hexToRgba('#ff5733', 0.5)) // 输出: "rgba(255,87,51,0.5)"
+
+export const rgbToHex = (r, g, b) => {
+  return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)
+}
+// console.log(rgbToHex(255, 87, 51)) // 输出: "#ff5733"

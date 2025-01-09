@@ -27,11 +27,9 @@ const menuTheme = computed(() => layoutSetting.menuTheme)
 
 // 获取当前打开的子菜单
 const getOpenKeys = () =>
-  currentRoute.meta.namePath ??
-  currentRoute.matched.slice(1).map(item => item.name)
+  currentRoute.meta.namePath ?? currentRoute.matched.slice(1).map((item) => item.name)
 
-const getRouteByName = name =>
-  router.getRoutes().find(item => item.name === name)
+const getRouteByName = (name) => router.getRoutes().find((item) => item.name === name)
 
 // 监听菜单收缩状态
 watch(

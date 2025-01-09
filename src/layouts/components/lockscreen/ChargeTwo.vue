@@ -23,10 +23,7 @@ const batteryStatus = computed(() => {
   }
 })
 const calcDischargingTime = computed(() => {
-  if (
-    Number.isFinite(props.battery.dischargingTime) &&
-    props.battery.dischargingTime !== 0
-  ) {
+  if (Number.isFinite(props.battery.dischargingTime) && props.battery.dischargingTime !== 0) {
     const time = props.battery.dischargingTime / 60
     const hour = Math.floor(time / 60)
     const minute = Math.floor(time % 60)
@@ -36,10 +33,7 @@ const calcDischargingTime = computed(() => {
   }
 })
 const calcChargingTime = computed(() => {
-  if (
-    Number.isFinite(props.battery.chargingTime) &&
-    props.battery.chargingTime !== 0
-  ) {
+  if (Number.isFinite(props.battery.chargingTime) && props.battery.chargingTime !== 0) {
     const time = props.battery.chargingTime / 60
     const hour = Math.floor(time / 60)
     const minute = Math.floor(time % 60)
@@ -125,8 +119,8 @@ const calcChargingTime = computed(() => {
       width: @width;
       height: @width;
       transform: translate(-50%, -50%);
-      animation: move-to-top unit(~`(Math.round(Math.random() * 6) + 3) `, s)
-        ease-in-out unit(~`-(Math.random() * 5000 / 1000) `, s) infinite;
+      animation: move-to-top unit(~`(Math.round(Math.random() * 6) + 3) `, s) ease-in-out
+        unit(~`-(Math.random() * 5000 / 1000) `, s) infinite;
     }
   }
 

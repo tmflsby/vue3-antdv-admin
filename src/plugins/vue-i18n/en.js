@@ -61,6 +61,7 @@ export default {
     cacheTabs: 'CacheTabs',
     progress: 'Progress',
     breadcrumb: 'Breadcrumb',
+    breadcrumbIcon: 'BreadcrumbIcon',
     setting: 'Setting',
     fullscreen: 'Fullscreen',
     exitFullscreen: 'ExitFullscreen',
