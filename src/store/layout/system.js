@@ -36,7 +36,6 @@ export const useSystemStore = defineStore(
         }
       })
     }
-    getMenuList(menus.value)
 
     const updateMenus = (type, route) => {
       switch (type) {
@@ -57,6 +56,7 @@ export const useSystemStore = defineStore(
     watch(
       () => menus.value,
       () => {
+        menuList.value = []
         getMenuList(menus.value)
       },
     )

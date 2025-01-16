@@ -70,7 +70,11 @@ const tabBarStyle = ref({
       @change="changePage"
       @edit="editTabItem"
     >
-      <a-tab-pane v-for="tabItem in systemStore.getTabsList" :key="tabItem.fullPath">
+      <a-tab-pane
+        v-for="tabItem in systemStore.getTabsList"
+        :key="tabItem.fullPath"
+        :closable="systemStore.getTabsList.length > 1"
+      >
         <template #tab>
           <TabsOperator :ref="(ins) => (itemRefs[tabItem.fullPath] = ins)" :tabItem="tabItem" />
         </template>
