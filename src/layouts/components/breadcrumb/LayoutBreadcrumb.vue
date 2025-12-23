@@ -66,28 +66,28 @@ const style = computed(() => {
 
 <template>
   <div class="layout-breadcrumb">
-    <a-breadcrumb :style="style">
+    <ABreadcrumb :style="style">
       <template v-for="(routeItem, routeIndex) in menus" :key="routeItem?.name">
-        <a-breadcrumb-item>
+        <ABreadcrumbItem>
           <Icon class="iconify anticon" v-if="showBreadcrumbIcon" :icon="routeItem?.meta.icon" />
           <span class="cursor-pointer ml10px">{{ t(routeItem?.meta?.title) }}</span>
           <template v-if="routeItem?.children?.length" #overlay>
-            <a-menu :selected-keys="getSelectKeys(routeIndex)" :theme="theme">
+            <AMenu :selected-keys="getSelectKeys(routeIndex)" :theme="theme">
               <template v-for="childItem in routeItem?.children" :key="childItem.name">
-                <a-menu-item @click="clickMenuItem(childItem)">
+                <AMenuItem @click="clickMenuItem(childItem)">
                   <Icon
                     class="iconify anticon"
                     v-if="showBreadcrumbIcon"
                     :icon="childItem.meta.icon"
                   />
                   <span class="ml10px">{{ t(childItem.meta?.title) }}</span>
-                </a-menu-item>
+                </AMenuItem>
               </template>
-            </a-menu>
+            </AMenu>
           </template>
-        </a-breadcrumb-item>
+        </ABreadcrumbItem>
       </template>
-    </a-breadcrumb>
+    </ABreadcrumb>
   </div>
 </template>
 

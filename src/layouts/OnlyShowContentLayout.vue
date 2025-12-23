@@ -13,19 +13,19 @@ const showSetting = computed(() => layoutSetting.showSetting)
 </script>
 
 <template>
-  <a-layout class="h100vh overflow-hidden">
-    <a-watermark v-if="watermark && watermarkArea_content" :content="watermarkText">
+  <ALayout class="h100vh overflow-hidden">
+    <AWatermark v-if="watermark && watermarkArea_content" :content="watermarkText">
       <LayoutPage />
-    </a-watermark>
+    </AWatermark>
     <LayoutPage v-else />
-    <a-card
+    <ACard
       class="pos-fixed right--1 top-100 z-999"
-      :bodyStyle="{ padding: '10px' }"
       v-if="showSetting"
+      :bodyStyle="{ padding: '10px' }"
     >
       <LayoutSetting />
-    </a-card>
-  </a-layout>
+    </ACard>
+  </ALayout>
 </template>
 
 <style lang="less" scoped></style>

@@ -15,14 +15,14 @@ const isShowSubMenu = (menuItem) => menuItem?.children?.length
 
 <template>
   <!-- 目录 -->
-  <a-sub-menu v-if="isShowSubMenu(item)" v-bind="$attrs" :key="item?.name">
+  <ASubMenu v-if="isShowSubMenu(item)" v-bind="$attrs" :key="item?.name">
     <template #title>
       <MenuItemContent :item="item" />
     </template>
     <template v-for="child in item.children || []" :key="child.name">
       <SubMenuItem :item="child" />
     </template>
-  </a-sub-menu>
+  </ASubMenu>
   <!-- 菜单 -->
   <MenuItem v-else :item="item" />
 </template>

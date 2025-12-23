@@ -21,9 +21,9 @@ const handleMenuItemClick = (item) => {
 </script>
 
 <template>
-  <a-menu-item :key="item?.name" @click="handleMenuItemClick(item)">
+  <AMenuItem :key="item?.name" @click="handleMenuItemClick(item)">
     <MenuItemContent :item="item" />
-  </a-menu-item>
+  </AMenuItem>
 </template>
 
 <style lang="less" scoped></style>

@@ -55,38 +55,38 @@ const layoutHeaderStyle = computed(() => {
 </script>
 
 <template>
-  <a-layout-header class="flex-bc" :style="layoutHeaderStyle">
+  <ALayoutHeader class="flex-bc" :style="layoutHeaderStyle">
     <div :style="{ width: `${sidemenuWidth}px` }" v-if="!layout_sidemenu">
       <slot name="title"></slot>
     </div>
     <div :style="{ paddingLeft: layout_mixinmenu ? '20px' : 0 }" v-if="!layout_topmenu">
       <slot name="left"> </slot>
-      <a-space :size="20" v-if="!layout_topmenu">
+      <ASpace :size="20" v-if="!layout_topmenu">
         <span class="cursor-pointer" @click="() => emit('update:collapsed', !collapsed)">
           <component :is="collapsed ? MenuUnfoldOutlined : MenuFoldOutlined" />
         </span>
         <LayoutBreadcrumb v-if="showBreadcrumb" />
-      </a-space>
+      </ASpace>
     </div>
-    <div class="flex-cc flex-1">
+    <div class="flex-bc flex-1">
       <slot name="menu" />
     </div>
     <div>
-      <a-space :size="20">
+      <ASpace :size="20">
         <SearchMenu v-if="showSearchMenu" />
-        <a-tooltip :title="t('setting.lockScreen')" v-if="showLockScreen">
+        <ATooltip :title="t('setting.lockScreen')" v-if="showLockScreen">
           <LockOutlined @click="systemStore.setLockScreenState(true)" />
-        </a-tooltip>
+        </ATooltip>
         <FullScreen v-if="showFullScreen" />
-        <a-tooltip :title="t('setting.refreshReset')" v-if="showRefreshReset">
+        <ATooltip :title="t('setting.refreshReset')" v-if="showRefreshReset">
           <SyncOutlined @click="systemStore.clearCacheReload()" />
-        </a-tooltip>
+        </ATooltip>
         <LocaleLanguage v-if="locale" />
         <UserAvatar />
         <LayoutSetting v-if="showSetting" />
-      </a-space>
+      </ASpace>
     </div>
-  </a-layout-header>
+  </ALayoutHeader>
 </template>
 
 <style lang="less" scoped></style>

@@ -9,11 +9,9 @@ const RefreshRoute = {
   meta: {
     title: 'route.refresh',
   },
-  beforeEnter: (to, from) => {
+  beforeEnter: async (to, from) => {
     // 刷新
-    setTimeout(() => {
-      router.replace(from.fullPath)
-    })
+    await router.replace(from.fullPath)
     return true
   },
 }
@@ -31,7 +29,7 @@ const RootRoute = {
   path: '/',
   redirect: '/dashboard',
   name: 'Layout',
-  component: () => import('@/layouts/LayoutDefault.vue'),
+  component: () => import('@/layouts/LayoutTemplate.vue'),
   meta: {
     title: 'route.rootRoute',
     icon: 'material-symbols:account-tree-outline-rounded',

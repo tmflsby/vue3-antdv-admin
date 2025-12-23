@@ -1,7 +1,7 @@
 <script setup></script>
 
 <template>
-  <a-card>AboutView</a-card>
+  <ACard>AboutView</ACard>
 </template>
 
 <style scoped lang="less"></style>

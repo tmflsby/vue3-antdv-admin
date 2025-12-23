@@ -23,14 +23,14 @@ const border = computed(() => layoutThemeStore.border)
 </script>
 
 <template>
-  <a-layout class="h100vh overflow-hidden">
+  <ALayout class="h100vh overflow-hidden">
     <LayoutHeader v-if="showHeader" v-model:collapsed="collapsed">
       <template #title>
         <LayoutTitle v-if="showTitle" />
       </template>
     </LayoutHeader>
-    <a-layout>
-      <a-layout-sider
+    <ALayout>
+      <ALayoutSider
         v-model:collapsed="collapsed"
         :width="sidemenuWidth"
         :theme="menuTheme"
@@ -40,19 +40,19 @@ const border = computed(() => layoutThemeStore.border)
         :style="{ borderRight: border }"
       >
         <LayoutMenu :collapsed="collapsed" />
-      </a-layout-sider>
-      <a-layout>
-        <a-layout-content>
+      </ALayoutSider>
+      <ALayout>
+        <ALayoutContent>
           <LayoutTabs />
-          <a-watermark v-if="watermark && watermarkArea_content" :content="watermarkText">
+          <AWatermark v-if="watermark && watermarkArea_content" :content="watermarkText">
             <LayoutPage />
-          </a-watermark>
+          </AWatermark>
           <LayoutPage v-else />
-        </a-layout-content>
+        </ALayoutContent>
         <LayoutFooter v-if="showFooter" />
-      </a-layout>
-    </a-layout>
-  </a-layout>
+      </ALayout>
+    </ALayout>
+  </ALayout>
 </template>
 
 <style scoped lang="less"></style>

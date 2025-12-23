@@ -10,11 +10,11 @@ const copyright = computed(() => layoutThemeStore.layoutSetting.copyright)
 </script>
 
 <template>
-  <a-layout-footer style="padding: 0 20px 20px 20px">
-    <a-card class="text-center" :bodyStyle="{ padding: '10px' }">
+  <ALayoutFooter style="padding: 0 20px 20px 20px">
+    <ACard class="text-center" :bodyStyle="{ padding: '10px' }">
       Copyright ©{{ systemTime.year }} {{ copyright }}
-    </a-card>
-  </a-layout-footer>
+    </ACard>
+  </ALayoutFooter>
 </template>
 
 <style lang="less" scoped></style>

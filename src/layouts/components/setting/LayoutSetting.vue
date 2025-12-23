@@ -44,13 +44,13 @@ const handleColorPickerInput = (e) => {
 </script>
 
 <template>
-  <a-tooltip :title="t('setting.projectConfig')" :placement="'bottomRight'">
+  <ATooltip :title="t('setting.projectConfig')" :placement="'bottomRight'">
     <SettingOutlined @click="showDrawer" />
-  </a-tooltip>
-  <a-drawer v-model:open="visible" placement="right" :title="t('setting.projectConfig')">
-    <a-descriptions :title="t('setting.menuLayout')" :column="5">
-      <a-descriptions-item v-for="item in layouts" :key="item.value">
-        <a-tooltip :title="t(item.label)">
+  </ATooltip>
+  <ADrawer v-model:open="visible" placement="right" :title="t('setting.projectConfig')">
+    <ADescriptions :title="t('setting.menuLayout')" :column="5">
+      <ADescriptionsItem v-for="item in layouts" :key="item.value">
+        <ATooltip :title="t(item.label)">
           <div
             class="style-checkbox-item"
             :class="{ active: layoutSetting.layout === item.value }"
@@ -60,26 +60,26 @@ const handleColorPickerInput = (e) => {
               <use :xlink:href="`#svg-icon-${item.value}`" />
             </svg>
           </div>
-        </a-tooltip>
-      </a-descriptions-item>
-    </a-descriptions>
-    <a-descriptions :title="t('setting.themeColor')" :column="themeColors.length - 1">
-      <a-descriptions-item v-for="item in themeColors" :key="item.key">
+        </ATooltip>
+      </ADescriptionsItem>
+    </ADescriptions>
+    <ADescriptions :title="t('setting.themeColor')" :column="themeColors.length - 1">
+      <ADescriptionsItem v-for="item in themeColors" :key="item.key">
         <div class="style-checkbox-item" v-if="item.tag === 'checkbox'">
-          <a-tooltip :title="t(item.title)">
-            <a-tag :color="item.value" @click="setThemeColor(item.value)">
+          <ATooltip :title="t(item.title)">
+            <ATag :color="item.value" @click="setThemeColor(item.value)">
               <span :style="{ visibility: getThemeColorVisible(item.value) }"> ✔ </span>
-            </a-tag>
-          </a-tooltip>
+            </ATag>
+          </ATooltip>
         </div>
-        <a-flex
+        <AFlex
           justify="space-between"
           class="w-full flex items-center style-checkbox-item"
           v-if="item.tag === 'input-color'"
         >
           {{ t('setting.customColor') }}
-          <a-tag :color="colorPrimary" class="relative overflow-hidden">
-            <a-input
+          <ATag :color="colorPrimary" class="relative overflow-hidden">
+            <AInput
               type="color"
               class="cursor-pointer absolute top-0 left-0 w-full h-full"
               :style="colorPickerStyle"
@@ -87,82 +87,78 @@ const handleColorPickerInput = (e) => {
               @input="handleColorPickerInput"
             />
             <span :style="{ visibility: getThemeColorVisible(colorPrimary) }"> ✔ </span>
-          </a-tag>
-        </a-flex>
-      </a-descriptions-item>
-    </a-descriptions>
-    <a-descriptions :title="t('setting.pageDisplay')" :column="1">
-      <a-descriptions-item v-for="item in uiSettings" :key="item.value">
-        <a-flex
+          </ATag>
+        </AFlex>
+      </ADescriptionsItem>
+    </ADescriptions>
+    <ADescriptions :title="t('setting.pageDisplay')" :column="1">
+      <ADescriptionsItem v-for="item in uiSettings" :key="item.value">
+        <AFlex
           justify="space-between"
           class="w-full flex items-center"
           v-if="item.tag === 'switch'"
         >
           {{ t(item.label) }}
-          <a-switch v-model:checked="layoutSetting[item.value]" />
-        </a-flex>
-        <a-flex
+          <ASwitch v-model:checked="layoutSetting[item.value]" />
+        </AFlex>
+        <AFlex
           justify="space-between"
           class="w-full flex items-center"
           v-if="item.tag === 'input-number'"
         >
           {{ t(item.label) }}
-          <a-input-number
+          <AInputNumber
             style="width: 200px"
             v-model:value="layoutSetting[item.value]"
             :min="item.min"
             :max="item.max"
             :addon-after="t(item.unit)"
           />
-        </a-flex>
-        <a-flex
-          justify="space-between"
-          class="w-full flex items-center"
-          v-if="item.tag === 'input'"
-        >
+        </AFlex>
+        <AFlex justify="space-between" class="w-full flex items-center" v-if="item.tag === 'input'">
           {{ t(item.label) }}
-          <a-input style="width: 200px" v-model:value="layoutSetting[item.value]" />
-        </a-flex>
-        <a-flex
+          <AInput style="width: 200px" v-model:value="layoutSetting[item.value]" />
+        </AFlex>
+        <AFlex
           justify="space-between"
           class="w-full flex items-center"
           v-if="item.tag === 'select'"
         >
           {{ t(item.label) }}
-          <a-select
+          <ASelect
             style="width: 200px"
             v-if="item.value === 'animation'"
             v-model:value="layoutSetting.animation"
           >
-            <a-select-option v-for="val in animations" :key="val.animation">
+            <ASelectOption v-for="val in animations" :key="val.animation">
               {{ t(val.name) }}
-            </a-select-option>
-          </a-select>
-          <a-select
+            </ASelectOption>
+          </ASelect>
+          <ASelect
             style="width: 200px"
             v-else-if="item.value === 'animationDirection'"
             v-model:value="layoutSetting.animationDirection"
           >
-            <a-select-option
+            <ASelectOption
               v-for="val in animations.find((i) => i.animation === layoutSetting.animation).options"
               :key="val"
             >
               {{ val }}
-            </a-select-option>
-          </a-select>
-          <a-select v-else style="width: 200px" v-model:value="layoutSetting[item.value]">
-            <a-select-option v-for="val in item.options" :key="val.value" :value="val.value">
+            </ASelectOption>
+          </ASelect>
+          <ASelect v-else style="width: 200px" v-model:value="layoutSetting[item.value]">
+            <ASelectOption v-for="val in item.options" :key="val.value" :value="val.value">
               {{ t(val.label) }}
-            </a-select-option>
-          </a-select>
-        </a-flex>
-        <a-flex
+            </ASelectOption>
+          </ASelect>
+        </AFlex>
+        <AFlex
           justify="space-between"
           class="w-full flex items-center"
           v-if="item.tag === 'segmented'"
         >
           {{ t(item.label) }}
-          <a-segmented
+          <ASegmented
             v-model:value="layoutSetting[item.value]"
             :options="
               item.options.map((option) => ({
@@ -171,20 +167,20 @@ const handleColorPickerInput = (e) => {
               }))
             "
           />
-        </a-flex>
-      </a-descriptions-item>
-    </a-descriptions>
+        </AFlex>
+      </ADescriptionsItem>
+    </ADescriptions>
     <template #footer>
       <div class="flex-ac">
-        <a-button class="w-45%" type="primary" @click="copySettings">
+        <AButton class="w-45%" type="primary" @click="copySettings">
           {{ t('setting.copy') }}
-        </a-button>
-        <a-button class="w-45%" type="primary" danger @click="systemStore.clearCacheReload">
+        </AButton>
+        <AButton class="w-45%" type="primary" danger @click="systemStore.clearCacheReload">
           {{ t('setting.clearCacheAndReset') }}
-        </a-button>
+        </AButton>
       </div>
     </template>
-  </a-drawer>
+  </ADrawer>
 </template>
 
 <style lang="less" scoped>

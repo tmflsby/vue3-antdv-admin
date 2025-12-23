@@ -70,10 +70,10 @@ export const useSystemStore = defineStore(
     let keepAliveList = ref([])
     const addKeepAliveList = (name) => {
       if (typeof name === 'string') {
-        !keepAliveList.value.includes(name) && keepAliveList.value.push(name)
+        if (!keepAliveList.value.includes(name)) keepAliveList.value.push(name)
       } else {
         name.forEach((item) => {
-          item && !keepAliveList.value.includes(item) && keepAliveList.value.push(item)
+          if (item && !keepAliveList.value.includes(item)) keepAliveList.value.push(item)
         })
       }
     }
@@ -103,7 +103,7 @@ export const useSystemStore = defineStore(
         if (cur.name && router.hasRoute(cur.name)) {
           const componentName = routes.find((item) => item.name === cur.name)?.components?.default
             ?.name
-          componentName && acc.push(componentName)
+          if (componentName) acc.push(componentName)
         }
         return acc
       }, [])

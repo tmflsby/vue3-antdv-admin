@@ -66,13 +66,13 @@ const leaveActiveClass = computed(
         </Suspense>
       </template>
     </RouterView>
-    <a-card
+    <ACard
       class="pos-fixed right--1 top-100 z-999"
       v-if="!showHeader && !showTabs && showSetting"
       :bodyStyle="{ padding: '10px' }"
     >
       <LayoutSetting />
-    </a-card>
+    </ACard>
   </div>
 </template>
 

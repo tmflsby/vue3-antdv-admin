@@ -62,15 +62,15 @@ defineExpose({
 })
 const closeLeft = () => {
   systemStore.closeLeftTabs(props.tabItem)
-  !isCurrentRoute(props.tabItem) && router.replace(props.tabItem.fullPath)
+  if (!isCurrentRoute(props.tabItem)) router.replace(props.tabItem.fullPath)
 }
 const closeRight = () => {
   systemStore.closeRightTabs(props.tabItem)
-  !isCurrentRoute(props.tabItem) && router.replace(props.tabItem.fullPath)
+  if (!isCurrentRoute(props.tabItem)) router.replace(props.tabItem.fullPath)
 }
 const closeOther = () => {
   systemStore.closeOtherTabs(props.tabItem)
-  !isCurrentRoute(props.tabItem) && router.replace(props.tabItem.fullPath)
+  if (!isCurrentRoute(props.tabItem)) router.replace(props.tabItem.fullPath)
 }
 const closeAll = () => {
   systemStore.closeAllTabs()
@@ -106,7 +106,7 @@ const openPageFile = async () => {
 </script>
 
 <template>
-  <a-dropdown :trigger="[isExtra ? 'click' : 'contextmenu']">
+  <ADropdown :trigger="[isExtra ? 'click' : 'contextmenu']">
     <span v-if="isExtra" class="cursor-pointer" @click.prevent>
       <DownOutlined />
     </span>
@@ -117,43 +117,43 @@ const openPageFile = async () => {
       <span>{{ t(tabItem.meta?.title) }}</span>
     </div>
     <template #overlay>
-      <a-menu style="user-select: none">
-        <a-menu-item key="1" :disabled="activeKey !== tabItem.fullPath" @click="reloadPage">
+      <AMenu style="user-select: none">
+        <AMenuItem key="1" :disabled="activeKey !== tabItem.fullPath" @click="reloadPage">
           <ReloadOutlined />
           重新加载
-        </a-menu-item>
-        <a-menu-item key="2" @click="removeTab">
+        </AMenuItem>
+        <AMenuItem key="2" @click="removeTab">
           <CloseOutlined />
           关闭标签页
-        </a-menu-item>
-        <a-divider class="m0" />
-        <a-menu-item key="3" @click="closeLeft">
+        </AMenuItem>
+        <ADivider class="m0" />
+        <AMenuItem key="3" @click="closeLeft">
           <VerticalRightOutlined />
           关闭左侧标签页
-        </a-menu-item>
-        <a-menu-item key="4" @click="closeRight">
+        </AMenuItem>
+        <AMenuItem key="4" @click="closeRight">
           <VerticalLeftOutlined />
           关闭右侧标签页
-        </a-menu-item>
-        <a-divider class="m0" />
-        <a-menu-item key="5" @click="closeOther">
+        </AMenuItem>
+        <ADivider class="m0" />
+        <AMenuItem key="5" @click="closeOther">
           <ColumnWidthOutlined />
           关闭其他标签页
-        </a-menu-item>
-        <a-menu-item key="6" @click="closeAll">
+        </AMenuItem>
+        <AMenuItem key="6" @click="closeAll">
           <MinusOutlined />
           关闭全部标签页
-        </a-menu-item>
+        </AMenuItem>
         <template v-if="isDevMode">
-          <a-divider class="m0" />
-          <a-menu-item key="7" @click="openPageFile">
+          <ADivider class="m0" />
+          <AMenuItem key="7" @click="openPageFile">
             <ColumnWidthOutlined />
             打开页面文件
-          </a-menu-item>
+          </AMenuItem>
         </template>
-      </a-menu>
+      </AMenu>
     </template>
-  </a-dropdown>
+  </ADropdown>
 </template>
 
 <style lang="less" scoped></style>

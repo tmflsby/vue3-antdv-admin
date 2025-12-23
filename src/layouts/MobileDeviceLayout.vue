@@ -21,8 +21,8 @@ const watermarkText = computed(() => layoutSetting.watermarkText)
 </script>
 
 <template>
-  <a-layout>
-    <a-drawer
+  <ALayout>
+    <ADrawer
       v-model:open="collapsed"
       :placement="'left'"
       :bodyStyle="{ padding: 0 }"
@@ -31,17 +31,17 @@ const watermarkText = computed(() => layoutSetting.watermarkText)
     >
       <LayoutTitle v-if="showTitle" :collapsed="false" />
       <LayoutMenu :collapsed="collapsed" />
-    </a-drawer>
+    </ADrawer>
     <LayoutHeader v-if="showHeader" v-model:collapsed="collapsed" />
-    <a-layout-content>
+    <ALayoutContent>
       <LayoutTabs />
-      <a-watermark v-if="watermark && watermarkArea_content" :content="watermarkText">
+      <AWatermark v-if="watermark && watermarkArea_content" :content="watermarkText">
         <LayoutPage />
-      </a-watermark>
+      </AWatermark>
       <LayoutPage v-else />
-    </a-layout-content>
+    </ALayoutContent>
     <LayoutFooter v-if="showFooter" />
-  </a-layout>
+  </ALayout>
 </template>
 
 <style scoped lang="less"></style>

@@ -281,12 +281,12 @@ export const uiSettings = [
     value: 'locale',
     tag: 'switch',
   },
-  // {
-  //   label: 'setting.language',
-  //   value: 'language',
-  //   tag: 'select',
-  //   options: i18nSettings
-  // },
+  {
+    label: 'setting.language',
+    value: 'language',
+    tag: 'select',
+    options: i18nSettings,
+  },
   {
     label: 'setting.setting',
     value: 'showSetting',
@@ -361,7 +361,7 @@ export const uiSettings = [
   },
 ]
 
-/**algorithm
+/**
  * 默认配置
  * 修改后要清除 localStorage secessionStorage 才能生效
  * */

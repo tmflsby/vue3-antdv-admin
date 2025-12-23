@@ -13,12 +13,12 @@ const getTitle = computed(() =>
 </script>
 
 <template>
-  <a-tooltip :title="getTitle">
+  <ATooltip :title="getTitle">
     <span @click="toggle" class="cursor-pointer">
       <FullscreenOutlined v-if="!isFullscreen" />
       <FullscreenExitOutlined v-else />
     </span>
-  </a-tooltip>
+  </ATooltip>
 </template>
 
 <style lang="less" scoped></style>

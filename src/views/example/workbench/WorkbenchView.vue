@@ -42,12 +42,12 @@ const deleteDynamicRoute = () => {
 </script>
 
 <template>
-  <a-card>
-    <a-button-group>
-      <a-button type="primary" @click="addDynamicRoute">增加动态路由</a-button>
-      <a-button type="primary" danger @click="deleteDynamicRoute">删除动态路由</a-button>
-    </a-button-group>
-  </a-card>
+  <ACard>
+    <AButtonGroup>
+      <AButton type="primary" @click="addDynamicRoute">增加动态路由</AButton>
+      <AButton type="primary" danger @click="deleteDynamicRoute">删除动态路由</AButton>
+    </AButtonGroup>
+  </ACard>
 </template>
 
 <style scoped lang="less"></style>

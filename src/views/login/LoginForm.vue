@@ -52,36 +52,36 @@ const onFinishFailed = (errorInfo) => {
 </script>
 
 <template>
-  <a-form :model="formState" @finish="onFinish" @finishFailed="onFinishFailed">
-    <a-form-item
+  <AForm :model="formState" @finish="onFinish" @finishFailed="onFinishFailed">
+    <AFormItem
       name="username"
       :rules="[{ required: true, message: t('message.pleaseEnterUsername') }]"
     >
-      <a-input v-model:value="formState.username">
+      <AInput v-model:value="formState.username">
         <template #prefix>
           <UserOutlined />
         </template>
-      </a-input>
-    </a-form-item>
-    <a-form-item
+      </AInput>
+    </AFormItem>
+    <AFormItem
       name="password"
       :rules="[{ required: true, message: t('message.pleaseEnterPassword') }]"
     >
-      <a-input-password v-model:value="formState.password">
+      <AInputPassword v-model:value="formState.password">
         <template #prefix>
           <LockOutlined />
         </template>
-      </a-input-password>
-    </a-form-item>
-    <a-form-item
+      </AInputPassword>
+    </AFormItem>
+    <AFormItem
       name="verifyCode"
       :rules="[{ required: true, message: t('message.pleaseEnterVerifyCode') }]"
     >
-      <a-input class="w250px" v-model:value="formState.verifyCode">
+      <AInput class="w250px" v-model:value="formState.verifyCode">
         <template #prefix>
           <Icon icon="material-symbols-light:key" />
         </template>
-      </a-input>
+      </AInput>
       <span
         class="ml10px pl10px pr10px font-bold text-22px align-mid cursor-pointer bg-yellow"
         :style="{ borderRadius: `${borderRadius}px` }"
@@ -89,13 +89,13 @@ const onFinishFailed = (errorInfo) => {
       >
         {{ imageCode }}
       </span>
-    </a-form-item>
-    <a-form-item>
-      <a-button class="w100%" type="primary" html-type="submit">
+    </AFormItem>
+    <AFormItem>
+      <AButton class="w100%" type="primary" html-type="submit">
         {{ t('setting.login') }}
-      </a-button>
-    </a-form-item>
-  </a-form>
+      </AButton>
+    </AFormItem>
+  </AForm>
 </template>
 
 <style scoped lang="less"></style>

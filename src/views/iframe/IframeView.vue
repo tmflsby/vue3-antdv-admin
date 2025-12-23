@@ -5,9 +5,9 @@ const route = useRoute()
 </script>
 
 <template>
-  <a-card>
+  <ACard>
     <iframe class="w100% h800px border-none" :src="route.meta.iframe" :name="route.name" />
-  </a-card>
+  </ACard>
 </template>
 
 <style lang="less" scoped></style>

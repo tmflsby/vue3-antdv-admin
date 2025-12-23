@@ -83,10 +83,10 @@ onKeyStroke('ArrowDown', () => {
 </script>
 
 <template>
-  <a-tooltip :title="t('setting.searchMenu')">
+  <ATooltip :title="t('setting.searchMenu')">
     <SearchOutlined @click="modalOpen = true" />
-    <a-modal v-model:open="modalOpen" :closable="false" :keyboard="false">
-      <a-input
+    <AModal v-model:open="modalOpen" :closable="false" :keyboard="false">
+      <AInput
         ref="inputRef"
         size="large"
         placeholder="搜索菜单"
@@ -96,10 +96,10 @@ onKeyStroke('ArrowDown', () => {
         <template #prefix>
           <SearchOutlined />
         </template>
-      </a-input>
+      </AInput>
       <div class="max-h600px overflow-auto" v-if="resultOptions.length > 0">
         <template v-for="item in resultOptions" :key="item.path">
-          <a-card
+          <ACard
             class="shadow mt10px cursor-pointer"
             :bodyStyle="{ padding: '18px' }"
             :style="
@@ -117,32 +117,32 @@ onKeyStroke('ArrowDown', () => {
               class="float-right mt5px"
               icon="mdi:keyboard-return"
             />
-          </a-card>
+          </ACard>
         </template>
       </div>
-      <a-empty v-else class="p20px m0" />
+      <AEmpty v-else class="p20px m0" />
       <template #footer>
         <div class="flex-bc">
-          <a-space :size="20">
-            <a-space-compact class="flex items-center">
+          <ASpace :size="20">
+            <ASpaceCompact class="flex items-center">
               <Icon class="shadow mr8px" icon="mdi:keyboard-return" />
               {{ t('setting.confirm') }}
-            </a-space-compact>
-            <a-space-compact class="flex items-center">
+            </ASpaceCompact>
+            <ASpaceCompact class="flex items-center">
               <Icon class="shadow mr8px" icon="mdi:keyboard-arrow-up" />
               <Icon class="shadow mr8px" icon="mdi:keyboard-arrow-down" />
               {{ t('setting.toggle') }}
-            </a-space-compact>
-            <a-space-compact class="flex items-center">
+            </ASpaceCompact>
+            <ASpaceCompact class="flex items-center">
               <Icon class="shadow mr8px" icon="mdi:keyboard-esc" />
               {{ t('setting.close') }}
-            </a-space-compact>
-          </a-space>
+            </ASpaceCompact>
+          </ASpace>
           <span v-if="resultOptions.length > 0">共{{ resultOptions.length }}项</span>
         </div>
       </template>
-    </a-modal>
-  </a-tooltip>
+    </AModal>
+  </ATooltip>
 </template>
 
 <style lang="less" scoped></style>

@@ -33,7 +33,7 @@ watch(
 
 const itemRefs = {}
 const changePage = (key) => {
-  Object.is(route.fullPath, key) || router.push(key)
+  if (!Object.is(route.fullPath, key)) router.push(key)
 }
 const editTabItem = (targetKey, action) => {
   if (action === 'remove') {
@@ -59,7 +59,7 @@ const tabBarStyle = ref({
 
 <template>
   <div class="tabs-view">
-    <a-tabs
+    <ATabs
       class="tabs"
       type="editable-card"
       v-if="showTabs"
@@ -70,7 +70,7 @@ const tabBarStyle = ref({
       @change="changePage"
       @edit="editTabItem"
     >
-      <a-tab-pane
+      <ATabPane
         v-for="tabItem in systemStore.getTabsList"
         :key="tabItem.fullPath"
         :closable="systemStore.getTabsList.length > 1"
@@ -78,25 +78,25 @@ const tabBarStyle = ref({
         <template #tab>
           <TabsOperator :ref="(ins) => (itemRefs[tabItem.fullPath] = ins)" :tabItem="tabItem" />
         </template>
-      </a-tab-pane>
+      </ATabPane>
       <template #rightExtra>
-        <a-space>
+        <ASpace>
           <template #split>
-            <a-divider type="vertical" />
+            <ADivider type="vertical" />
           </template>
           <TabsOperator :tabItem="route" :isExtra="true" />
           <SearchMenu v-if="!showHeader && showSearchMenu" />
-          <a-tooltip title="锁屏" v-if="!showHeader && showLockScreen">
+          <ATooltip title="锁屏" v-if="!showHeader && showLockScreen">
             <LockOutlined @click="systemStore.setLockScreenState(true)" />
-          </a-tooltip>
+          </ATooltip>
           <FullScreen v-if="!showHeader && showFullScreen" />
-          <a-tooltip title="刷新重置" v-if="!showHeader && showRefreshReset">
+          <ATooltip title="刷新重置" v-if="!showHeader && showRefreshReset">
             <ReloadOutlined @click="systemStore.clearCacheReload()" />
-          </a-tooltip>
+          </ATooltip>
           <LayoutSetting v-if="!showHeader && showSetting" />
-        </a-space>
+        </ASpace>
       </template>
-    </a-tabs>
+    </ATabs>
     <slot></slot>
   </div>
 </template>

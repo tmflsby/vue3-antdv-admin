@@ -13,16 +13,16 @@ const logout = () => {
 </script>
 
 <template>
-  <a-dropdown>
+  <ADropdown>
     <template #overlay>
-      <a-menu>
-        <a-menu-item @click="logout">{{ t('setting.logout') }}</a-menu-item>
-      </a-menu>
+      <AMenu>
+        <AMenuItem @click="logout">{{ t('setting.logout') }}</AMenuItem>
+      </AMenu>
     </template>
-    <a-avatar :src="userInfo.avatar" :alt="userInfo.username">
+    <AAvatar :src="userInfo.avatar" :alt="userInfo.username">
       {{ userInfo.username }}
-    </a-avatar>
-  </a-dropdown>
+    </AAvatar>
+  </ADropdown>
 </template>
 
 <style scoped lang="less"></style>

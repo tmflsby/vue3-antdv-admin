@@ -18,15 +18,15 @@ const bodyStyle = computed(() => ({
 </script>
 
 <template>
-  <a-card class="w100vw h100vh" :bodyStyle="bodyStyle">
-    <a-card
+  <ACard class="w100vw h100vh" :bodyStyle="bodyStyle">
+    <ACard
       class="pos-fixed right--1 top-100 z-999"
       :bodyStyle="{ padding: '10px' }"
       v-if="showSetting"
     >
       <LayoutSetting />
-    </a-card>
-    <a-card
+    </ACard>
+    <ACard
       class="pos-absolute w400px h400px"
       :style="{
         top: 'calc(50% - 200px)',
@@ -37,8 +37,8 @@ const bodyStyle = computed(() => ({
         <div class="text-center">{{ title }}</div>
       </template>
       <LoginForm />
-    </a-card>
-  </a-card>
+    </ACard>
+  </ACard>
 </template>
 
 <style lang="less" scoped></style>

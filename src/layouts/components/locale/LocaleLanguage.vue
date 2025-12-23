@@ -13,20 +13,20 @@ const changeLocaleLanguage = (language) => {
 </script>
 
 <template>
-  <a-dropdown>
+  <ADropdown>
     <template #overlay>
-      <a-menu>
-        <a-menu-item
+      <AMenu>
+        <AMenuItem
           v-for="item in i18nSettings"
           :key="item.value"
           @click="changeLocaleLanguage(item.value)"
         >
           {{ t(item.label) }}
-        </a-menu-item>
-      </a-menu>
+        </AMenuItem>
+      </AMenu>
     </template>
     <Icon class="iconify anticon" icon="grommet-icons:language" />
-  </a-dropdown>
+  </ADropdown>
 </template>
 
 <style scoped lang="less"></style>

@@ -66,7 +66,7 @@ const clickMenuItem = ({ key }) => {
 </script>
 
 <template>
-  <a-menu
+  <AMenu
     class="border-none!"
     v-model:selected-keys="selectedKeys"
     :open-keys="!layout_topmenu ? openKeys : []"
@@ -79,7 +79,7 @@ const clickMenuItem = ({ key }) => {
     <template v-for="item in menus" :key="item.name">
       <SubMenuItem :item="item" />
     </template>
-  </a-menu>
+  </AMenu>
 </template>
 
 <style lang="less" scoped></style>

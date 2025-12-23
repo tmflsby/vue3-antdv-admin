@@ -28,16 +28,16 @@ const locale = computed(() => {
 </script>
 
 <template>
-  <a-config-provider :theme="theme" :locale="locale">
-    <a-watermark v-if="watermark && watermarkArea_all" :content="watermarkText">
+  <AConfigProvider :theme="theme" :locale="locale">
+    <AWatermark v-if="watermark && watermarkArea_all" :content="watermarkText">
       <RouterView />
       <LockScreen />
-    </a-watermark>
+    </AWatermark>
     <template v-else>
       <RouterView />
       <LockScreen />
     </template>
-  </a-config-provider>
+  </AConfigProvider>
 </template>
 
 <style lang="less" scoped></style>

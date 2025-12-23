@@ -163,33 +163,33 @@ const handleSubmitPassword = () => {
     </template>
     <template v-else>
       <div class="login-box">
-        <a-form @submit="handleSubmitPassword">
-          <a-input-password
+        <AForm @submit="handleSubmitPassword">
+          <AInputPassword
             style="width: 300px"
             v-model:value="password"
             autofocus
             :placeholder="pwdPlaceholder"
           />
-        </a-form>
+        </AForm>
         <div class="flex justify-between w-full">
           <template v-if="systemStore.lockScreenPassword">
-            <a-button type="link" size="small" @click="hideLockForm">
+            <AButton type="link" size="small" @click="hideLockForm">
               {{ t('setting.turnBack') }}
-            </a-button>
-            <a-button type="link" size="small" @click="hintPassword">
+            </AButton>
+            <AButton type="link" size="small" @click="hintPassword">
               {{ t('setting.passwordHint') }}
-            </a-button>
-            <a-button type="link" size="small" @click="onLogin">
+            </AButton>
+            <AButton type="link" size="small" @click="onLogin">
               {{ t('setting.enterSystem') }}
-            </a-button>
+            </AButton>
           </template>
           <template v-else>
-            <a-button type="link" size="small" @click="cancelLock">
+            <AButton type="link" size="small" @click="cancelLock">
               {{ t('setting.cancelLockScreen') }}
-            </a-button>
-            <a-button type="link" size="small" @click="lockScreen">
+            </AButton>
+            <AButton type="link" size="small" @click="lockScreen">
               {{ t('setting.confirmLockScreen') }}
-            </a-button>
+            </AButton>
           </template>
         </div>
       </div>
